@@ -1,7 +1,3 @@
-/**
- * Author:
- * Description: Counts 3 and 4 cycles
- */
 #include <bits/stdc++.h>
 #define rep(i, a, b) for(int i = a; i < (b); ++i)
 #define all(x) x.begin(), x.end()
