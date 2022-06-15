@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Latex auxiliary files
+*.aux
+*.log
+*.ptc
+*.DS_Store

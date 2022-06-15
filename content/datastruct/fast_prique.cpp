@@ -8,11 +8,6 @@
  * Usage: push(i, v) overwrites value at position i if one already exists. decKey is faster, but does nothing if the new key is smaller than the old one. top and pop can segfault if called on an empty priority queue.
  * Status: not tested, change interface?
  */
-
-
-// Struct for priority queue operations on index set [0, n-1]
-// push(i, v) overwrites value at position i if one already exists
-// decKey is faster but requires that the new key is smaller than the old one
 struct Prique {
 	const ll INF = 4 * (ll)1e18;
 	vector<pair<ll, int>> data;
