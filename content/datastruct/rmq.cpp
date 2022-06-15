@@ -1,7 +1,7 @@
 /**
  * Author: Antti Roeyskoe
  * Date: 22-06-15
- * License: CC0
+ * License: MIT
  * Source: self
  * Description: range minimum query data structure with low memory and fast queries
  * Time: O(N) preprocessing, O(1) query.

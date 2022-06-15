@@ -1,7 +1,7 @@
 /**
  * Author: Antti Roeyskoe
  * Date: 22-06-15
- * License: CC0
+ * License: MIT
  * Source: self
  * Description: Segment tree supporting range addition and range sum, minimum queries
  * Time: O(\log N).

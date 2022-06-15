@@ -1,7 +1,7 @@
 /**
  * Author: Antti Roeyskoe
  * Date: 22-06-15
- * License: CC0
+ * License: MIT
  * Source: self
  * Description: van Emde Boas tree for maintaining a subset of $\{0, \dots, 2^B - 1\}$
  * Time: O(\log B).

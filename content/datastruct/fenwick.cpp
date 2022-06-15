@@ -1,7 +1,7 @@
 /**
  * Author: Antti Roeyskoe
  * Date: 22-06-15
- * License: CC0
+ * License: MIT
  * Source: self
  * Description: Fenwick tree with built in binary search. Can be used as a indexed set.
  * Time: O(\log N).

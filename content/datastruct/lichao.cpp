@@ -1,7 +1,7 @@
 /**
  * Author: Antti Roeyskoe
  * Date: 22-06-15
- * License: CC0
+ * License: MIT
  * Source: self
  * Description: Li Chao tree. Given x-coordinates, supports adding lines and computing minimum Y-coordinate at a given input x-coordinate
  * Time: O(\log N).
