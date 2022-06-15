@@ -5,7 +5,7 @@
  * Source: self
  * Description: van Emde Boas tree for maintaining a subset of $\{0, \dots, 2^B - 1\}$
  * Time: O(\log B).
- * Usage: findPrev(i): returns maximum j <= i in set, or -1 if none exist\\ insert(i), erase(i): insert/erase i into the set\\ empty(): returns TRUE if the set is empty\\ clear(): empties the set\\init(bts): inits the set, after the call i will be in the set if bts[i] = 1. bts should be a bitset, but can be a vector of 0/1
+ * Usage: findPrev(i): returns maximum $j \leq i$ in set, or -1 if none exist\\ insert(i), erase(i): insert/erase i to/from the set\\ empty(): returns TRUE if the set is empty\\ clear(): empties the set\\init(bts): inits the set, after the call i will be in the set if bts[i] = 1. bts should be a bitset, but can be a vector of 0/1
  * Status: tested a bit. Should not be included in the PDF
  */
 template<int B, typename ENABLE = void>
