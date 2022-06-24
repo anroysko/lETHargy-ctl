@@ -4,10 +4,11 @@
  * Usage: For example, if you want to add clause (not x) or (y), just call addclause(x, 0, y, 1);
  * Time: O(|V| + |C|)
  */
-struct TwoSat {
+class TwoSat {
 	int n;
 	vector<vi> e;
 	vector<bool> ans;
+public:
 	TwoSat(int n): n(n), e(n * 2), ans(n) {}
 
 	void addclause(int x, int f, int y, int g) {

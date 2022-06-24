@@ -3,17 +3,16 @@
  * Description: Fast bipartite matching.
  * Time: O(|E| \sqrt{|V|}).
  */
-struct Hopcroft {
+class Hopcroft {
 	int n, m;
 	vector<vi> g;
 	vi lm, rm; // record the matched vertex for each vertex on both sides.
-
+public:
 	// two parts: part L of size n and part R of size m.
 	Hopcroft(int n, int m): n(n), m(m), g(n), lm(n, -1), rm(m, -1) {}
 	void add(int i, int j) { g[i].push_back(j); } // add edge from i \in L to j in R.
 
-	int work() {
-		int ans = 0;
+	vi work() { // returns lm (vertices matched to left part).
 		while (1) {
 			vi ldis(n), rdis(m); // changing to static does not speed up.
 			bool ok = 0;
@@ -46,8 +45,8 @@ struct Hopcroft {
 				}
 				return 0;
 			};
-			rep(i, 0, n - 1) if (lm[i] == -1 && find(i)) ans++;
+			rep(i, 0, n - 1) if (lm[i] == -1) find(i);
 		}
-		return ans;
+		return lm;
 	}
 };

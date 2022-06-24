@@ -4,12 +4,10 @@
  * Time: Amortized O(\log N)
  */
 template<class T> class Undo_DSU {
-private:
 	vector<T> fa, siz;
 	vector<pair<T*, T>> sta;
 
 	void safechg(T &x, T y) { sta.pb({&x, x}); x = y; }
-
 public:
 	Undo_DSU(int n): fa(n), siz(n, 1) {
 		iota(all(fa), 0);
