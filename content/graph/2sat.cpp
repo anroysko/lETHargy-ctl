@@ -1,4 +1,5 @@
 /**
+ * Author: Yuhao Yao
  * Description: 2SAT solve, returns if a 2SAT problem is satisfiable. If yes, it also gives an assignment.
  * Usage: For example, if you want to add clause (not x) or (y), just call addclause(x, 0, y, 1);
  * Time: O(|V| + |C|)
