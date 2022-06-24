@@ -1,4 +1,8 @@
-// 0-based indexing.
+/**
+ * Description: 2SAT solve, returns if a 2SAT problem is satisfiable. If yes, it also gives an assignment.
+ * Usage: For example, if you want to add clause (not x) or (y), just call addclause(x, 0, y, 1);
+ * Time: O(|V| + |C|)
+ */
 struct TwoSat {
 	int n;
 	vector<vi> e;
@@ -6,7 +10,6 @@ struct TwoSat {
 	TwoSat(int n): n(n), e(n * 2), ans(n) {}
 
 	void addclause(int x, int f, int y, int g) {
-		// e.g. if you want to add clause (not x) or (y), just call addclause(x, 0, y, 1);
 		e[x * 2 + !f].pb(y * 2 + g);
 		e[y * 2 + !g].pb(x * 2 + f);
 	}

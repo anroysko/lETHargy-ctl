@@ -1,8 +1,7 @@
 /**
  * Description: old = Use get_top() to get a save point; use undo(old) to go back to the save point.
- * Time: O(\log N)
+ * Time: Amortized O(\log N)
  */
-
 template<class T> class Undo_DSU {
 private:
 	vector<T> fa, siz;

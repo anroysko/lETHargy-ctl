@@ -1,4 +1,7 @@
-// 0-based indexing.
+/**
+ * Description: Fast bipartite matching.
+ * Time: O(|E| \sqrt{|V|}).
+ */
 struct Hopcroft {
 	int n, m;
 	vector<vi> g;
