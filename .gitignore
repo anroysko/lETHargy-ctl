@@ -36,3 +36,7 @@
 *.log
 *.ptc
 *.DS_Store
+
+# Generated PDf
+build/kactl.pdf
+kactl.pdf
