@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Description: old = Use get\_top() to get a save point; use undo(old) to go back to the save point.
+ * Description: Use old = get\_top() to get a save point; use undo(old) to go back to the save point.
  * Time: Amortized O(\log N)
  */
 template<class T> class Undo_DSU {
