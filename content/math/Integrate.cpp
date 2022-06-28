@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Description: Let $f(𝑥)$ be a continuous function over $[a, b]$ having a fourth derivative,
+ * Description: Let $f(x)$ be a continuous function over $[a, b]$ having a fourth derivative,
  *  $f^{(4)}(x)$, over this interval. If $M$ is the maximum value of $|f^{(4)}(x)|$ over $[a, b]$,
  *  then the upper bound for the error is $O(\frac{M(b - a)^5}{N^4})$.
  * Time: O(N \cdot T), where $T$ is the time for evaluating $f$ once.
