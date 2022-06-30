@@ -10,7 +10,7 @@
 
 template<const int &mod_> struct Z {
 	/// start-hash
-	static constexpr int mod = mod_;
+	static constexpr const int &mod = mod_;
 	int x;
 	Z(ll a = 0): x(a % mod) { if (x < 0) x += mod; }
 
