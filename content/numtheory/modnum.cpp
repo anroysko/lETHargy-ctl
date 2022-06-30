@@ -4,6 +4,7 @@
 	1. You do not need to keep writing \% $mod$;
 	2. It is good to use this struct when doing Gaussian Elimination / Fast Walsh-Hadamard Transform;
 	3. Sometimes the input number is greater than $mod$ and using this code just handles it.
+ * Usage: mod should be a global variable (either const int or int).
  */
 #pragma once
 
