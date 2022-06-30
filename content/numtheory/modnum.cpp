@@ -7,7 +7,7 @@
  */
 #pragma once
 
-template<int mod> struct Z {
+template<const int &mod> struct Z {
 	/// start-hash
 	int x;
 	Z(ll a = 0): x(a % mod) { if (x < 0) x += mod; }
