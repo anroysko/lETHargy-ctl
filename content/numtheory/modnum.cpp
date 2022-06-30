@@ -20,10 +20,13 @@ template<const int &mod_> struct Z {
 	friend Z operator *(Z a, Z b) { a.x = 1ll * a.x * b.x % mod; return a; }
 	/// end-hash
 
+	// the following are needed for fft and polynomial operations.
+	/// start-hash
 	Z& operator +=(Z b) { x = norm(x + b.x); return *this; }
 	Z& operator -=(Z b) { x = norm(x - b.x); return *this; }
+	Z& operator *=(Z b) { x = 1ll * x * b.x % mod; return *this; }
 
-	static Z power(Z a, ll k) { /// start-hash
+	static Z power(Z a, ll k) {
 		Z res = 1;
 		for (; k; k >>= 1, a = a * a) if (k & 1) res = res * a;
 		return res;
