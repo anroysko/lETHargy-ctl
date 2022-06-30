@@ -8,8 +8,9 @@
  */
 #pragma once
 
-template<const int &mod> struct Z {
+template<const int &mod_> struct Z {
 	/// start-hash
+	static constexpr int mod = mod_;
 	int x;
 	Z(ll a = 0): x(a % mod) { if (x < 0) x += mod; }
 
