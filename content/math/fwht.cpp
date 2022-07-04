@@ -6,16 +6,16 @@
  */
 
 template<class T> void fwt(vector<T> &a, int is_inv) {
-    int N = sz(a);
-    for (int s = 1; s < N; s <<= 1)
-        for (int i = 0; i < N; i += s << 1)
-            rep(j, 0, s - 1) {
-                T x = a[i + j], y = a[i + j + s];
-                a[i + j] = x + y; 
-                a[i + j + s] = x - y;
-            }
- 
-    if (is_inv) {
-        for(auto &x: a) x = x / N;
-    }
+	int N = sz(a);
+	for (int s = 1; s < N; s <<= 1)
+		for (int i = 0; i < N; i += s << 1)
+			rep(j, 0, s - 1) {
+				T x = a[i + j], y = a[i + j + s];
+				a[i + j] = x + y; 
+				a[i + j + s] = x - y;
+			}
+
+	if (is_inv) {
+		for(auto &x: a) x = x / N;
+	}
 }

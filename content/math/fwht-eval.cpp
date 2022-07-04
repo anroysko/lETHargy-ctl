@@ -6,11 +6,11 @@
  */
 
 template<class T> T fwt_eval(const vector<T> &a, int id) {
-    int N = sz(a);
-    T res = 0;
-    rep(i, 0, N - 1) {
-        if (__builtin_popcount(i & id) & 1) res -= a[i];
-        else res += a[i];
-    }
-    return res;
+	int N = sz(a);
+	T res = 0;
+	rep(i, 0, N - 1) {
+		if (__builtin_popcount(i & id) & 1) res -= a[i];
+		else res += a[i];
+	}
+	return res;
 }
