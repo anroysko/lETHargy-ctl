@@ -1,7 +1,7 @@
 /**
  * Author: Yuhao Yao
  * Description: Dinic algorithm for max flow.
- * Time: O(n^2 m) for arbitrary networks. O(m \sqrt{n}) for bipartite network. O(min{|V|^(2/3), |E|^(1/2)} |E|) for networks with only unit capacities.
+ * Time: O(n^2 m) for arbitrary networks. O(m \sqrt{n}) for bipartite/unit network. O(min{|V|^(2/3), |E|^(1/2)} |E|) for networks with only unit capacities.
  */
 
 template<class F = int, F F_MAX = numeric_limits<F>::max()> struct Dinic {
