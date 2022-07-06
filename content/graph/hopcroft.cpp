@@ -2,7 +2,7 @@
  * Author: Yuhao Yao
  * Description: Fast bipartite matching.
  * Time: O(|E| \sqrt{|V|}).
- * Status: vertex cover tested on https://ac.nowcoder.com/acm/contest/885/F.
+ * Status: vertex cover correctness is tested on https://ac.nowcoder.com/acm/contest/885/F.
  */
 
 class Hopcroft {
