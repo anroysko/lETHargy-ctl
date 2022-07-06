@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Description: Fast bipartite matching.
+ * Description: Fast bipartite matching. You can also get a vertex cover of a bipartite graph easily.
  * Time: O(|E| \sqrt{|V|}).
  * Status: vertex cover correctness is tested on https://ac.nowcoder.com/acm/contest/885/F.
  */
