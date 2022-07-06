@@ -5,11 +5,12 @@
  */
 
 template<class F = int, F F_MAX = numeric_limits<F>::max()> struct Dinic {
+	/// start-hash
 	int n;
 	struct E { int to; F cap; };
 	vector<E> e;
 	vector<vi> g;
-	vi dis; // put it here so you can get the minimum cut easily.
+	vi dis; // put it here to get the minimum cut easily.
 
 	Dinic(int n): n(n), g(n) {}
 
@@ -19,8 +20,6 @@ template<class F = int, F F_MAX = numeric_limits<F>::max()> struct Dinic {
 	}
 
 	F max_flow(int src, int sink) {
-		vi cur;
-
 		auto bfs = [&]() {
 			dis.assign(n, -1);
 			queue<int> que;
@@ -39,6 +38,7 @@ template<class F = int, F F_MAX = numeric_limits<F>::max()> struct Dinic {
 			return dis[sink] != -1;
 		};
 
+		vi cur;
 		function<F(int, F)> dfs = [&](int now, F flow) {
 			if (now == sink) return flow;
 			F res = 0;
@@ -62,12 +62,12 @@ template<class F = int, F F_MAX = numeric_limits<F>::max()> struct Dinic {
 			ans += dfs(src, F_MAX);
 		}
 		return ans;
-	}
+	} /// end-hash
 
-	vector<bool> min_cut(int src, int sink) {
+	vector<bool> min_cut(int src, int sink) { /// start-hash
 		max_flow(src, sink);
 		vector<bool> res(n);
 		rep(i, 0, n - 1) res[i] = (dis[i] != -1);
 		return res;
-	}
+	} /// end-hash
 };
