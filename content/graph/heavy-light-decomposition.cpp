@@ -7,7 +7,7 @@
 struct HLD {
 	int n;
 	vi par, hson, dfn, dep, top;
-	HLD(vvi &g, int rt = 0): n(sz(g)), par(n), hson(n, -1), dfn(n), dep(n, 0), top(n) {
+	HLD(vvi &g, int rt = 0): n(sz(g)), par(n, -1), hson(n, -1), dfn(n), dep(n, 0), top(n) {
 		vi siz(n);
 		function<void(int, int)> dfs = [&](int now, int fa) {
 			siz[now] = 1;
