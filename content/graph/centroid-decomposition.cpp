@@ -10,7 +10,7 @@ struct CentroidDecomposition {
 	int n;
 	vector<vi> anc, cdis;
 
-	CentroidDecomposition(vvi &g): n(sz(g)), anc(n), cdis(n) {
+	CentroidDecomposition(vector<vi> &g): n(sz(g)), anc(n), cdis(n) {
 		vi siz(n);
 		vector<bool> vis(n);
 		function<void(int, int)> solve = [&](int _, int tot) {
