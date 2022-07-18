@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Ddescription: Modular integer. Note that there are several advantages to use this code:
+ * Description: Modular integer. Note that there are several advantages to use this code:
 	1. You do not need to keep writing \% $mod$;
 	2. It is good to use this struct when doing Gaussian Elimination / Fast Walsh-Hadamard Transform;
 	3. Sometimes the input number is greater than $mod$ and using this code just handles it.
@@ -26,11 +26,13 @@ template<const int &mod_> struct Z {
 	Z& operator -=(Z b) { x = norm(x - b.x); return *this; }
 	Z& operator *=(Z b) { x = 1ll * x * b.x % mod; return *this; }
 
-	static Z power(Z a, ll k) {
+	static Z pow(Z a, ll k) {
 		Z res = 1;
 		for (; k; k >>= 1, a = a * a) if (k & 1) res = res * a;
 		return res;
 	}
-	friend Z operator /(Z a, Z b) { return a * power(b, mod - 2); }
+	friend Z operator /(Z a, Z b) { return a * pow(b, mod - 2); }
 	/// end-hash
+
+	friend string to_string(Z a) { return to_string(a.x); } // just for debug.
 };
