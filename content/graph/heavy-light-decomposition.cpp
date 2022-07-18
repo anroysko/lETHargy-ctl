@@ -1,7 +1,7 @@
 /**
  * Author: Yuhao Yao
  * Description: heavy light decomposition.
- * Time: O(N) for building. O(\log N) for lca. O(\logn N \cdot T) for add / ask. $T$ is the running time of func in add / ask.
+ * Time: O(N) for building. O(\log N) for lca. O(\log N \cdot T) for add / ask. $T$ is the running time of func in add / ask.
  */
 
 struct HLD {
