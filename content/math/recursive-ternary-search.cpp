@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Description: for convex function $f: \mathbb{R}^d \to \R$, we can approximately find the global minimum using ternary search on each coordinate recursively.
+ * Description: for convex function $f: \mathbb{R}^d \to \mathbb{R}$, we can approximately find the global minimum using ternary search on each coordinate recursively.
  * Usage: $d$ is the dimension; $mn, mx$ record the minimum and maximum possible value of each coordinate (the region you do ternary search); $f$ is the convex function.
  * Time: O(\log(1 / \epsilon) ^ {d} \cdot T), where $T$ is the time for evaluating the function $f$.
  */
