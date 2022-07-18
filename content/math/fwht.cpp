@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Description: Fast Walsh-Hadamard Transform fwt(a) = (\sum_i (-1)^{pc(i\&0)} a_i, ..., \sum_i (-1)^{pc(i\&n-1)} a_i). One can use it to do xor-convolution.
+ * Description: Fast Walsh-Hadamard Transform $fwt(a) = (\sum_i (-1)^{pc(i\&0)} a_i, ..., \sum_i (-1)^{pc(i\&n-1)} a_i)$. One can use it to do xor-convolution.
  * Usage: length of $a$ should be a power of $2$.
  * Time: O(N \log N), where $N$ is the length of $a$.
  */
