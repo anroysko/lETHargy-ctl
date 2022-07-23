@@ -3,3 +3,9 @@
 \kactlimport[-l rawcpp]{template.cpp}
 \kactlimport[-l sh]{hash.sh}
 \kactlimport[-l sh]{hash-cpp.sh}
+
+\section{Notes}
+Be cautious about the following:
+\begin{itemize}
+	\item \_\_lg(0) might cause undefined behaviour, same for \_\_builtin_ctz and \_\_builtin_clz.
+\end{itemize}
