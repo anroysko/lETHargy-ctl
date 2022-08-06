@@ -20,7 +20,7 @@ pair<int, vector<T>> Simplex(const vector<vector<T>> &A, const vector<T> &b, con
 	rep(i, 0, n - 1) a[i + 1][0] = b[i];
 	rep(j, 0, m - 1) a[0][j + 1] = c[j];
 
-	vi left(n + 1),  up(m + 1);
+	vi left(n + 1), up(m + 1);
 	iota(all(left), m);
 	iota(all(up), 0);
 
