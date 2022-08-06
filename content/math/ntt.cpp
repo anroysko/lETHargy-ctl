@@ -1,5 +1,6 @@
 /**
  * Author: Yuhao Yao
+ * Date: 22-08-06
  * Description: Number Theoretic Transform. Use modnum as template parameter.
  * Time: O(N \log N)
  */
@@ -16,7 +17,7 @@ template<class T> struct FFT {
 		rep(i, 1, n2 - 1) if (r[i] > i) swap(a[i], a[r[i]]);
 		for(int step = 1; step < n2; step <<= 1) {
 			vector<T> w(step);
-			T zeta = T::pow(g, (T::mod - 1) / (step << 1));
+			T zeta = g.pow((T::mod - 1) / (step << 1));
 			if (is_inv) zeta = 1 / zeta;
 
 			w[0] = 1;
