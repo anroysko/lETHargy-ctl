@@ -1,29 +1,30 @@
 /**
  * Author: Yuhao Yao
- * Description: Fast bipartite matching. You can also get a vertex cover of a bipartite graph easily.
+ * Date: 22-08-07
+ * Description: Fast maximum matching for bipartite graph $G = (V, E)$ where $V = L \cup R$. You can also get a vertex cover of a bipartite graph easily.
+ * Usage: add(i, j) to add an edge from $i \in L$ to $j \in R$. call match() to get the maximum matching.
  * Time: O(|E| \sqrt{|V|}).
- * Status: vertex cover correctness is tested on https://ac.nowcoder.com/acm/contest/885/F.
+ * Status: Vertex cover is tested on https://ac.nowcoder.com/acm/contest/885/F.
  */
 
-class Hopcroft {
-	int n, m;
+struct Hopcroft {
+	/// start-hash
+	int L, R;
 	vector<vi> g;
 	vi lm, rm; // matched vertex for each vertex on both sides.
 	vi ldis, rdis; // put them here to get vertex cover easily.
-public:
-	// two parts: part L of size n and part R of size m.
-	Hopcroft(int n, int m): n(n), m(m), g(n), lm(n, -1), rm(m, -1) {}
 
-	// add edge from i \in L to j in R.
+	Hopcroft(int L, int R): L(L), R(R), g(L), lm(L, -1), rm(R, -1) {}
+
 	void add(int i, int j) { g[i].push_back(j); }
 
 	vi match() { // returns lm (vertices matched to left part).
 		while (1) {
-			ldis.assign(n, -1);
-			rdis.assign(m, -1);
+			ldis.assign(L, -1);
+			rdis.assign(R, -1);
 			bool ok = 0;
 			vi que;
-			rep(i, 0, n - 1) if (lm[i] == -1) {
+			rep(i, 0, L - 1) if (lm[i] == -1) {
 				que.push_back(i);
 				ldis[i] = 0;
 			}
@@ -41,7 +42,7 @@ public:
 			}
 			if (ok == 0) break;
 
-			vi vis(m); // changing to static does not speed up.
+			vi vis(R); // changing to static does not speed up.
 
 			function<int(int)> find = [&](int i) {
 				for (auto j: g[i]) if (vis[j] == 0 && rdis[j] == ldis[i] + 1) {
@@ -54,16 +55,17 @@ public:
 				}
 				return 0;
 			};
-			rep(i, 0, n - 1) if (lm[i] == -1) find(i);
+			rep(i, 0, L - 1) if (lm[i] == -1) find(i);
 		}
 		return lm;
-	}
+	} /// end-hash
 
+	/// start-hash
 	pair<vector<bool>, vector<bool>> vertex_cover() {
-		vector<bool> lvc(n), rvc(m);
+		vector<bool> lvc(L), rvc(R);
 		match();
-		rep(i, 0, n - 1) lvc[i] = ldis[i] == -1;
-		rep(j, 0, m - 1) rvc[j] = rdis[j] != -1;
+		rep(i, 0, L - 1) lvc[i] = (ldis[i] == -1);
+		rep(j, 0, R - 1) rvc[j] = (rdis[j] != -1);
 		return {lvc, rvc};
-	} 
+	} /// end-hash
 };
