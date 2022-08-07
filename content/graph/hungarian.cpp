@@ -1,21 +1,24 @@
 /** 
  * Author: Yuhao Yao
- * Description: finds minimum weighted perfect matching of a bipartite graph. There should be sanme number of vertices on both sides.
- * Usage: w[i][j] is the weight of the edge from i'th vertex on the left to j'th vertex on the right.
- * Time: O(|V| ^ 3)
+ * Date: 22-08-07
+ * Description: Given a complete bipartite graph $G = (L \cup, R, E)$, where $|L| \le |R|$, Finds minimum weighted perfect matching of $L$. Returns the matching.
+ * Usage: $ws[i][j]$ is the weight of the edge from $i$-th vertex in $L$ to $j$-th vertex in $R$.
+ * Not sure how to choose safe $T$ since I can not give a bound on values in $lp$ and $rp$. Seems safe to always use \textbf{long long}.
+ * Time: O(|L|^2 |R|).
+ * Status: Seems to be fast enough. Tested on https://www.luogu.com.cn/problem/P6577, https://codeforces.com/gym/101635/problem/G, https://codeforces.com/gym/101194/problem/J.
  */
 template<class T = ll, T INF = numeric_limits<T>::max()>
-vector<pii> Hungarian(const vector<vector<T>> &w) {
-	int n = sz(w);
-	vector<T> lp(n), rp(n, 0); // left & right potential
-	vi lm(n, -1), rm(n, -1); // left & right match
-
-	rep(i, 0, n - 1) lp[i] = *min_element(all(w[i]));
-
+vector<pii> Hungarian(const vector<vector<T>> &ws) {
+	int L = sz(ws), R = sz(ws[0]);
+	vector<T> lp(L), rp(R); // left & right potential
+	vi lm(L, -1), rm(R, -1); // left & right match
+ 
+	rep(i, 0, L - 1) lp[i] = *min_element(all(ws[i]));
+ 
 	auto step = [&](int src) {
-		vi que{src}, pre(n, - 1); // bfs que & back pointers
-		vector<T> sa(n, INF); // slack array; Min slack from node in que
-
+		vi que{src}, pre(R, - 1); // bfs que & back pointers
+		vector<T> sa(R, INF); // slack array; min slack from node in que
+ 
 		auto extend = [&](int j) {
 			if (sa[j] == 0) {
 				if (rm[j] == -1) {
@@ -30,12 +33,12 @@ vector<pii> Hungarian(const vector<vector<T>> &w) {
 			}
 			return 0;
 		};
-
-		rep(ind, 0, n - 1) { // BFS to new nodes
+ 
+		rep(ind, 0, L - 1) { // BFS to new nodes
 			int i = que[ind];
-			rep(j, 0, n - 1) {
+			rep(j, 0, R - 1) {
 				if (j == lm[i]) continue;
-				T off = w[i][j] - lp[i] - rp[j]; // Slack in edge
+				T off = ws[i][j] - lp[i] - rp[j]; // Slack in edge
 				if (sa[j] > off) {
 					sa[j] = off;
 					pre[j] = i;
@@ -44,11 +47,11 @@ vector<pii> Hungarian(const vector<vector<T>> &w) {
 			}
 			if (ind == sz(que) - 1) { // Update potentials
 				T d = INF;
-				rep(j, 0, n - 1) if (sa[j]) d = min(d, sa[j]);
+				rep(j, 0, R - 1) if (sa[j]) d = min(d, sa[j]);
 				
 				bool found = 0;
 				for (auto i: que) lp[i] += d;
-				rep(j, 0, n - 1) {
+				rep(j, 0, R - 1) {
 					if (sa[j]) {
 						sa[j] -= d;
 						if (!found) found |= extend(j);
@@ -58,10 +61,10 @@ vector<pii> Hungarian(const vector<vector<T>> &w) {
 			}
 		}
 	};
-
-	rep(i, 0, n - 1) step(i);
-	
+ 
+	rep(i, 0, L - 1) step(i);
+ 
 	vector<pii> res;
-	rep(i, 0, n - 1) res.emplace_back(i, lm[i]);
+	rep(i, 0, L - 1) res.emplace_back(i, lm[i]);
 	return res;
 }
