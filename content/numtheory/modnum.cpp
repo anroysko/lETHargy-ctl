@@ -1,11 +1,12 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-08-06
+ * Date: 22-08-12
  * Description: Modular integer. Note that there are several advantages to use this code:
 	1. You do not need to keep writing \% $mod$;
 	2. It is good to use this struct when doing Gaussian Elimination / Fast Walsh-Hadamard Transform;
 	3. Sometimes the input number is greater than $mod$ and this code handles it.
  * Usage: $mod$ should be a global variable (either const int or int).
+ * Status: tested on https://ac.nowcoder.com/acm/contest/33191/F.
  */
 #pragma once
 
@@ -30,7 +31,11 @@ template<const int &mod_> struct Z {
 		for (; k; k >>= 1, a = a * a) if (k & 1) res = res * a;
 		return res;
 	}
-	Z& operator /=(Z b) { *this = *this * b.pow(mod - 2); return *this; }
+	Z& operator /=(Z b) {
+		assert(b.x != 0);
+		*this = *this * b.pow(mod - 2);
+		return *this;
+	}
 	friend Z operator /(Z a, Z b) { return a /= b; }
 	/// end-hash
 
