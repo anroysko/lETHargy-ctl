@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-08-12
+ * Date: 22-08-13
  * Description: Modular integer. Note that there are several advantages to use this code:
 	1. You do not need to keep writing \% $mod$;
 	2. It is good to use this struct when doing Gaussian Elimination / Fast Walsh-Hadamard Transform;
@@ -15,6 +15,7 @@ template<const int &mod_> struct Z {
 	static constexpr const int &mod = mod_;
 	int x;
 	Z(ll a = 0): x(a % mod) { if (x < 0) x += mod; }
+	explicit operator int() const { return x; }
 
 	Z& operator +=(Z b) { x += b.x; if (x >= mod) x -= mod; return *this; }
 	Z& operator -=(Z b) { x -= b.x; if (x < 0) x += mod; return *this; }
