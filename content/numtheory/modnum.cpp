@@ -1,11 +1,11 @@
 /**
  * Author: Yuhao Yao
  * Date: 22-08-14
- * Description: Modular integer. Note that there are several advantages to use this code:
+ * Description: Modular integer with $mod \le 2^{30} - 1$. Note that there are several advantages to use this code:
 	1. You do not need to keep writing \% $mod$;
 	2. It is good to use this struct when doing Gaussian Elimination / Fast Walsh-Hadamard Transform;
 	3. Sometimes the input number is greater than $mod$ and this code handles it.
- * Usage: $mod$ should be a global variable (either const int or int).
+ * Usage: $mod$ should be a global variable (either const int or int) and should satisfy $mod \le 2^{30} - 1$.
   Do not write things like Mint{1 / 3}.pow(10) since 1 / 3 simply equals 0.
  * Status: tested on https://ac.nowcoder.com/acm/contest/33191/F.
  */
