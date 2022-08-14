@@ -1,8 +1,15 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-08-06
- * Description: Number Theoretic Transform. Use modnum as template parameter.
- * Time: O(N \log N)
+ * Date: 22-08-14
+ * Description: Number Theoretic Transform.
+ * Usage: class T should have static function getMod() to provide the $mod$. We usually just use modnum as the template parameter.
+ To keep the code short we just set the primitive root as 3. However, it might be wrong when $mod \ne 998244353$. Here is some commonly used $mod$ and the corresponding primitive root.
+ $g \to  mod~(\max \log(n))$
+ 3 -> 104857601 (22), 167772161 (25), 469762049 (26), 998244353 (23), 1004535809 (21);
+ 10 -> 786433 (18);
+ 31 -> 2013265921 (27).
+ * Time: O(N \log N).
+ * Status: tested on https://ac.nowcoder.com/acm/contest/33186/H.
  */
 #pragma once
 
@@ -17,7 +24,7 @@ template<class T> struct FFT {
 		rep(i, 1, n2 - 1) if (r[i] > i) swap(a[i], a[r[i]]);
 		for(int step = 1; step < n2; step <<= 1) {
 			vector<T> w(step);
-			T zeta = g.pow((T::mod - 1) / (step << 1));
+			T zeta = g.pow((T::getMod() - 1) / (step << 1));
 			if (is_inv) zeta = 1 / zeta;
 
 			w[0] = 1;
