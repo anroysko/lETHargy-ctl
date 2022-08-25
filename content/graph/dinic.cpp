@@ -1,73 +1,80 @@
 /**
  * Author: Yuhao Yao
+ * Date: 22-08-25
  * Description: Dinic algorithm for max flow.
  * Time: O(n^2 m) for arbitrary networks. O(m \sqrt{n}) for bipartite/unit network. O(min{|V|^(2/3), |E|^(1/2)} |E|) for networks with only unit capacities.
+ * Usage: Always run $MaxFlow(src, sink)$ for some $src$ and $sink$ first. Then you can run $getMinCut$ to obtain a Minimum Cut. Note that in the returned cut, vertices in the same part as $src$ are marked with $1$.
+ * Status: tested on https://codeforces.com/gym/103861/problem/H. Seems to be fast enough now.
+ *  getDirFlow() and getUndirFlow() are not tested yet.
  */
 
-template<class F = int, F F_MAX = numeric_limits<F>::max()> struct Dinic {
+template<class Cap = int, Cap F_MAX = numeric_limits<Cap>::max()> struct Dinic {
 	/// start-hash
 	int n;
-	struct E { int to; F cap; };
-	vector<E> e;
+	struct E { int to; Cap a; }; // Endpoint & Admissible flow.
+	vector<E> es;
 	vector<vi> g;
-	vi dis; // put it here to get the minimum cut easily.
+	vi dis; // Put it here to get the minimum cut easily.
 
 	Dinic(int n): n(n), g(n) {}
 
-	void add(int u, int v, F c) {
-		g[u].push_back(sz(e)); e.push_back({v, c});
-		g[v].push_back(sz(e)); e.push_back({u, 0});
+	void addEdge(int u, int v, Cap c, bool dir = 1) {
+		g[u].push_back(sz(es)); es.push_back({v, c});
+		g[v].push_back(sz(es)); es.push_back({u, dir ? 0 : c});
 	}
 
-	F max_flow(int src, int sink) {
-		auto bfs = [&]() {
+	Cap MaxFlow(int src, int sink) {
+		auto revbfs = [&]() {
 			dis.assign(n, -1);
-			queue<int> que;
-			que.push(src); dis[src]=0;
+			dis[sink] = 0;
+			vi que{sink};
 			
-			while (sz(que)) {
-				int now = que.front(); que.pop();
+			rep(ind, 0, sz(que) - 1) {
+				int now = que[ind];
 				for (auto i: g[now]) {
-					auto [v, c] = e[i];
-					if (c > 0 && dis[v] == -1) {
+					auto v = es[i].to;
+					if (es[i ^ 1].a > 0 && dis[v] == -1) {
 						dis[v] = dis[now] + 1;
-						que.push(v);
+						que.push_back(v);
+						if (v == src) return 1;
 					}
 				}
 			}
-			return dis[sink] != -1;
+			return 0;
 		};
 
 		vi cur;
-		function<F(int, F)> dfs = [&](int now, F flow) {
+		auto dfs = [&](auto dfs, int now, Cap flow) {
 			if (now == sink) return flow;
-			F res = 0;
+			Cap res = 0;
 			for (int &id = cur[now]; id < sz(g[now]); id++) {
 				int i = g[now][id];
-				auto [v, c] = e[i];
-				if (c > 0 && dis[v] == dis[now] + 1) {
-					F x = dfs(v, min(flow - res, c));
+				auto [v, c] = es[i];
+				if (c > 0 && dis[v] == dis[now] - 1) {
+					Cap x = dfs(dfs, v, min(flow - res, c));
 					res += x;
-					e[i].cap -= x;
-					e[i ^ 1].cap += x;
+					es[i].a -= x;
+					es[i ^ 1].a += x;
 				}
 				if (res == flow) break;
 			}
 			return res;
 		};
 		
-		F ans = 0;
-		while (bfs()) {
+		Cap ans = 0;
+		while (revbfs()) {
 			cur.assign(n, 0);
-			ans += dfs(src, F_MAX);
+			ans += dfs(dfs, src, F_MAX);
 		}
 		return ans;
 	} /// end-hash
-
-	vector<bool> min_cut(int src, int sink) { /// start-hash
-		max_flow(src, sink);
-		vector<bool> res(n);
-		rep(i, 0, n - 1) res[i] = (dis[i] != -1);
+	// res[i] = 1 <-> vertex i is in the same part as src.
+	vi getMinCut() { /// start-hash
+		vi res(n);
+		rep(i, 0, n - 1) res[i] = (dis[i] == -1);
 		return res;
 	} /// end-hash
+	// Gives flow on edge assuming it is directed/undirected. Undirected flow is signed.
+	Cap getDirFlow(int i) { return es[i * 2 + 1].a; }
+	Cap getUndirFlow(int i) { return (es[i * 2 + 1].a - es[i * 2].a) / 2; }
 };
