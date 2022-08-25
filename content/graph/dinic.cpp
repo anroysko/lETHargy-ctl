@@ -32,7 +32,7 @@ template<class Cap = int, Cap F_MAX = numeric_limits<Cap>::max()> struct Dinic {
 			rep(ind, 0, sz(que) - 1) {
 				int now = que[ind];
 				for (auto i: g[now]) {
-					auto v = es[i].to;
+					int v = es[i].to;
 					if (es[i ^ 1].a > 0 && dis[v] == -1) {
 						dis[v] = dis[now] + 1;
 						que.push_back(v);
