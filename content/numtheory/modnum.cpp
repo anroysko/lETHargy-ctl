@@ -7,6 +7,7 @@
 	3. Sometimes the input number is greater than $mod$ and this code handles it.
  * Usage: $mod$ should be a global variable (either const int or int) and should satisfy $mod \le 2^{30} - 1$.
   Do not write things like Mint{1 / 3}.pow(10) since 1 / 3 simply equals 0.
+  Do not write things like Mint{a * b} where $a$ and $b$ are int since you might first have integer overflow.
  * Status: tested on https://ac.nowcoder.com/acm/contest/33191/F.
  */
 #pragma once
