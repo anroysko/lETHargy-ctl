@@ -3,7 +3,7 @@
  * Date: 22-07-23
  * Description: Sparse Table.
  * Time: O(N \log N) for construction, O(1) per query.
- * Status: Tested on https://ac.nowcoder.com/acm/contest/33186/B. (better to test more)
+ * Status: tested on https://ac.nowcoder.com/acm/contest/33186/B, https://qoj.ac/contest/695/problem/1857, https://codeforces.com/gym/103371/problem/M.
  */
 
 template<class T, class F = function<T(const T&, const T&)>>
