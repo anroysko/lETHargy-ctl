@@ -1,27 +1,22 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-06
- * Description: Cartesian Tree. Node with smaller depth has smaller value. Smaller is defined by comparison function $cmp$.
- * Usage: $cmp$ is in the same form as the comparison function you use for std function $sort$.
+ * Date: 22-09-08
+ * Description: Cartesian Tree of array $as$ (of distinct values). Node with smaller depth has smaller value. Set $gr = 1$ to have top with the greatest value.
  * Time: O(N) for construction.
- * Status: Tested on https://qoj.ac/contest/695/problem/1857, https://codeforces.com/gym/103371/problem/M.
+ * Status: Tested on https://qoj.ac/contest/695/problem/1857, https://codeforces.com/gym/103371/problem/M, https://codeforces.com/contest/1718/problem/D.
  */
 
-struct CartesianTree {
-	int n, rt;
-	vi ls, rs;
-
-	template<class T, class F = function<bool(const T&, const T&)>>
-	CartesianTree(const vector<T> &as, F cmp): n(sz(as)), ls(n, -1), rs(n, - 1) {
-		vi sta;
-		rep(i, 0, n - 1) {
-			int siz = sz(sta);
-			while (siz > 0 && cmp(as[i], as[sta[siz - 1]])) siz--;
-			if (siz > 0) rs[sta[siz - 1]] = i;
-			if (siz < sz(sta)) ls[i] = sta[siz];
-			sta.resize(siz);
-			sta.push_back(i);
+template<class T>
+auto CartesianTree(const vector<T> &as, int gr = 0) {
+	int n = sz(as);
+	vi ls(n, -1), rs(n, -1), sta;
+	rep(i, 0, n - 1) {
+		while (sz(sta) && ((as[i] < as[sta.back()]) ^ gr)) {
+			ls[i] = sta.back();
+			sta.pop_back();
 		}
-		rt = sta[0];
+		if (sz(sta)) rs[sta.back()] = i;
+		sta.push_back(i);
 	}
-};
+	return make_tuple(sta[0], ls, rs);
+}
