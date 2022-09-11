@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-08-14
+ * Date: 22-09-11
  * Description: Number Theoretic Transform.
  * Usage: class T should have static function getMod() to provide the $mod$. We usually just use modnum as the template parameter.
  To keep the code short we just set the primitive root as 3. However, it might be wrong when $mod \ne 998244353$. Here is some commonly used $mod$ and the corresponding primitive root.
@@ -18,7 +18,7 @@ template<class T> struct FFT {
 	vi r;
 	int n2;
 
-	FFT(): g(3) {}
+	FFT(T _g = 3): g(_g) {}
 
 	void dft(vector<T> &a, int is_inv) { // is_inv == 1 -> idft.
 		rep(i, 1, n2 - 1) if (r[i] > i) swap(a[i], a[r[i]]);
