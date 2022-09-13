@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-04
+ * Date: 22-09-13
  * Description: Segment tree. Point apply and thus no lazy propogation.
  * Usage: Always define a global apply function for class $Info$ you use to tell segment tree how you apply modification.
  *  Combine is set as plus so if you just let T be numerical type then you have range sum in the info and as range query result. To have something different, say rangeMin, define a struct with constructer and + operation.
@@ -15,8 +15,9 @@ template<class Info> struct Segtree {
 	int n; 
 	vector<Info> info;
 
-	Segtree(const vector<Info> &init): n(sz(init)), info(4 << __lg(n)) {
+	Segtree(const vector<Info> &init): n(sz(init)) {
 		assert(n > 0);
+		info.resize(4 << __lg(n));
 		auto build = [&](auto dfs, int i, int l, int r) {
 			if (l == r) {
 				info[i] = init[l];
