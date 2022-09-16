@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-13
+ * Date: 22-09-16
  * Description: Compute the sparse table for binary lifting of a tree $T$.
  * Time: O(|V|\log |V|) for precalculation and O(\log |V|) for each $lca$ query.
  * Status: tested on https://codeforces.com/contest/231/problem/E. https://codeforces.com/contest/1707/problem/C.
@@ -10,10 +10,11 @@ struct BinaryLifting {
 	int n;
 	vi dep;
 	vector<vi> anc;
-	BinaryLifting(const vector<vi> &g, int rt = 0): n(sz(g)), dep(n) {
+	BinaryLifting(const vector<vi> &g, int rt = 0): n(sz(g)), dep(n, -1) {
 		assert(n > 0);
 		anc.assign(n, vi(__lg(n) + 1));
 		auto dfs = [&](auto dfs, int now, int fa) -> void {
+			assert(dep[now] == -1); // make sure it is indeed a tree.
 			dep[now] = fa == -1 ? 0 : dep[fa] + 1;
 			anc[now][0] = fa;
 			rep(i, 1, __lg(n)) {
