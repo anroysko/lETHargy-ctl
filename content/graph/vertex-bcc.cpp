@@ -1,19 +1,18 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-16
+ * Date: 22-09-17
  * Description: Compute the Vertex-BiConnected Components of a \textbf{connected} graph. 
  *  Multiple edges and self loops are allowed.
  *  $id[eid]$ records the index of bcc the edge $eid$ is in.
  *  $top[u]$ records the second highest vertex (which is unique) in the bcc which vertex $u$ is in.
  *  If the graph is not connected then only the component which $st$ is in is considered.
  * Time: O(|E|).
- * Status: tested on https://codeforces.com/gym/102900/problem/K.
+ * Status: tested on https://codeforces.com/gym/102900/problem/K, https://official.contest.yandex.com/contest/26874/problems/K/.
  */
-
 struct VertexBCC {
 	int bcc;
 	vi dfn, low, top, id, fa;
-	VertexBCC(int n, const vector<pii> &es, int st = 0): bcc(0), dfn(n, -1), low(n), top(n), id(sz(es)), fa(n, -1) {
+	VertexBCC(int n, const vector<pii> &es, int st = 0): bcc(0), dfn(n, -1), low(n), top(n, -1), id(sz(es)), fa(n, -1) {
 		vi mark(sz(es)), sta;
 		int cnt = 0;
 		vvi g(n);
@@ -41,7 +40,6 @@ struct VertexBCC {
 							top[a] = top[b] = v;
 							sta.pop_back();
 						}
-						top.push_back(now);
 						bcc++;
 					}
 				} else low[now] = min(low[now], dfn[v]);
@@ -51,6 +49,7 @@ struct VertexBCC {
 		top[st] = st;
 	}
 	bool SameBcc(int x, int y) {
+		assert(dfn[x] != -1 && dfn[y] != -1);
 		if (x == fa[top[y]] || y == fa[top[x]]) return 1;
 		else return top[x] == top[y];
 	}
