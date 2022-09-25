@@ -1,10 +1,9 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-07-24
+ * Date: 22-09-24
  * Description: Suffix Array with sparse table answering lcp of suffices.
- * Usage: SA sa(s + string(1, 0)) for non-cyclic suffices.
  * Time: O(|s| \log |s|) for construction. O(1) per query.
- * Status: tested on https://ac.nowcoder.com/acm/contest/33186/B, https://codeforces.com/gym/102994/problem/D, https://ac.nowcoder.com/acm/contest/33195/D.
+ * Status: tested on https://ac.nowcoder.com/acm/contest/33186/B, https://codeforces.com/gym/102994/problem/D, https://ac.nowcoder.com/acm/contest/33195/D, https://www.luogu.com.cn/problem/P4094.
  */
 
 #include "suffix-array.cpp"
@@ -13,15 +12,17 @@ struct SA_lcp: SA {
 	vector<vi> st;
 	
 	template<class T> SA_lcp(const T &s): SA(s) {
-		assert(n > 1);
-		st.assign(__lg(n - 1) + 1, vi(n - 1));
+		assert(n > 0);
+		st.assign(__lg(n) + 1, vi(n));
 		st[0] = h;
-		rep(i, 1, __lg(n - 1)) rep(j, 0, n - 1 - (1 << i)) {
+		st[0].push_back(0); // just to make st[0] of size n.
+		rep(i, 1, __lg(n)) rep(j, 0, n - (1 << i)) {
 			st[i][j] = min(st[i - 1][j], st[i - 1][j + (1 << (i - 1))]);
 		}
 	}
-	// return lcp(suff[i], suff[j])
+	// return lcp(suff_i, suff_j) for i != j.
 	int lcp(int i, int j) {
+		if (i == n || j == n) return 0;
 		assert(i != j);
 		int l = rank[i], r = rank[j];
 		if (l > r) swap(l, r);
