@@ -1,7 +1,8 @@
 /**
  * Author: Yuhao Yao
  * Date: 22-09-08
- * Description: Hash. $1000000007$ and $1000050131$ are good moduli.
+ * Description: Hash struct. $1000000007$ and $1000050131$ are good moduli.
+ * Status: tested on https://ac.nowcoder.com/acm/contest/33192/I.
  */
 
 template<int m1, int m2>
