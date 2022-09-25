@@ -1,10 +1,10 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-11
+ * Date: 22-09-26
  * Description: Call fail table of pattern string $p$ in linear time and get all matched positions in text string $t$ in linear time.
  * Usage: KMP kmp(s) for string $s$ or vector<int> $s$.
  * Time: O(|p|) for precalculation and O(|p| + |t|) for matching.
- * Status: Not fully tested.
+ * Status: tested on https://www.luogu.com.cn/problem/P6216.
  */
 template<class T> struct KMP {
 	int n;
