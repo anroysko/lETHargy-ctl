@@ -6,7 +6,7 @@
  *  For returned vector $len$, $len[i * 2] = r$ means that $s_{i - r + 1}...s_{i + r - 1}$ is the maximal palindrome centered at position $i$.
  *  For returned vector $len$, $len[i * 2 + 1] = r$ means that $s_{i - r + 1}...s_{i + r}$ is the maximal palindrome centered between position $i$ and $i + 1$.
  * Time: O(|s|).
- * Status: tested on https://www.luogu.com.cn/problem/P3805, https://qoj.ac/problem/4844, https://www.luogu.com.cn/problem/P6216.
+ * Status: tested on https://www.luogu.com.cn/problem/P3805, https://qoj.ac/problem/4844, https://www.luogu.com.cn/problem/P6216, https://www.luogu.com.cn/problem/P4555.
  */
 
 template<class T>
