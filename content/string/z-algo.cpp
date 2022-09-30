@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-26
+ * Date: 22-09-30
  * Description: Given string $s = s_0...s_{n - 1}$, compute array $z$ where $z[i]$ is the lcp of $s_0...s_{n - 1}$ and $s_{i}...s_{n - 1}$.
  *  Use function $cal(t)$ (where $|t| = m$) to calculate the lcp of of $s_0...s_{n - 1}$ and $t_{i}...t_{m - 1}$ for each $i$.
  * Usage: zAlgo za(s) for string $s$ or vector<int> $s$.
@@ -31,7 +31,7 @@ struct zAlgo {
 		vi res(m);
 		int l = 0, r = 0;
 		rep(i, 0, m - 1) {
-			res[i] = max(0, min(z[i - l], r - i));
+			res[i] = max(0, min(i - l < n ? z[i - l] : 0, r - i));
 			while (i + res[i] < m && s[res[i]] == t[i + res[i]]) res[i]++;
 			if (i + res[i] > r) {
 				l = i;
