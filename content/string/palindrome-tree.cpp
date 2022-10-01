@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-29
+ * Date: 22-10-01
  * Description: Given string $s = s_0...s_{n - 1}$, build the palindrom tree (automaton) for $s$. Each state of the automaton corresponds to a palindrome substring of $s$.
  *  Note that $t[i].fa < i$ holds.
  * Usage: Palindrome pt(s) for string $s$ or vector<int> $s$.
@@ -13,7 +13,7 @@ struct PalindromeTree {
 		map<int, int> nxt;
 		int fail, len;
 		int cnt;
-		node(int fail = -1, int len = 0): fail(fail), len(len) {
+		node(int fail, int len): fail(fail), len(len) {
 			cnt = 0;
 		}
 	};
