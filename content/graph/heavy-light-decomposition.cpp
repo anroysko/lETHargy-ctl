@@ -1,70 +1,79 @@
 /**
  * Author: Yuhao Yao
- * Description: heavy light decomposition.
- * Time: O(N) for building. O(\log N) for lca. O(\log N \cdot T) for add / ask. $T$ is the running time of func in add / ask.
+ * Date: 22-10-08
+ * Description: Heavy Light Decomposition for a tree $T$ (can be modified easily for forest).
+ * Usage: $g$ should be the adjacent list of the tree $T$. $rt$ for specifying the root of the tree $T$ (default 0).
+ *  $chainApply(u, v, func, val)$ and $chainAsk(u, v, func)$ are used for apply / query on the simple path from $u$ to $v$ on tree $T$. $func$ is the function you want to use to apply / query on a interval. (Say rangeApply / rangeAsk of Segment tree.)
+ * Time: O(|T|) for building. O(\log N) for lca. O(\log |T| \cdot A) for chainApply / chainAsk, where $A$ is the running time of $func$ in chainApply / chainAsk.
+ * Status: tested on https://codeforces.com/contest/487/problem/E.
  */
 
 struct HLD {
 	int n;
-	vi par, hson, dfn, dep, top;
-	HLD(vvi &g, int rt = 0): n(sz(g)), par(n, -1), hson(n, -1), dfn(n), dep(n, 0), top(n) {
+	vi fa, hson, dfn, dep, top;
+	HLD(vvi &g, int rt = 0): n(sz(g)), fa(n, -1), hson(n, -1), dfn(n), dep(n, 0), top(n) {
 		vi siz(n);
-		function<void(int, int)> dfs = [&](int now, int fa) {
+		auto dfs = [&](auto &dfs, int now) -> void {
 			siz[now] = 1;
 			int mx = 0;
-			for (auto v: g[now]) if (v != fa) {
+			for (auto v: g[now]) if (v != fa[now]) {
 				dep[v] = dep[now] + 1;
-				par[v] = now;
-				dfs(v, now);
+				fa[v] = now;
+				dfs(dfs, v);
 				siz[now] += siz[v];
-				if (mx < siz[v]) mx = siz[v], hson[now] = v;
+				if (mx < siz[v]) {
+					mx = siz[v];
+					hson[now] = v;
+				}
 			}
 		};
-		dfs(rt, -1);
+		dfs(dfs, rt);
 
 		int cnt = 0;
-		function<void(int, int)> getdfn = [&](int now, int sp) {
+		auto getdfn = [&](auto &dfs, int now, int sp) {
 			top[now] = sp;
 			dfn[now] = cnt++;
 			if (hson[now] == -1) return;
-			getdfn(hson[now], sp);
-			for (auto v: g[now]) if(v != hson[now] && v != par[now]) getdfn(v, v);
+			dfs(dfs, hson[now], sp);
+			for (auto v: g[now]) {
+				if(v != hson[now] && v != fa[now]) dfs(dfs, v, v);
+			}
 		};
-		getdfn(rt, rt);
+		getdfn(getdfn, rt, rt);
 	}
 
 	int lca(int u, int v) {
 		while (top[u] != top[v]) {
 			if (dep[top[u]] < dep[top[v]]) swap(u, v);
-			u = par[top[u]];
+			u = fa[top[u]];
 		}
 		if (dep[u] < dep[v]) return u;
 		else return v;
 	}
 
-	// the following function is for info on edges.
-	template<class T> void add(const function<void(int, int, T)> &func, int u, int v, const T &val) {
+	template<class... T>
+	void chainApply(int u, int v, const function<void(int, int, T...)> &func, const T&... val) {
 		int f1 = top[u], f2 = top[v];
 		while (f1 != f2) {
 			if (dep[f1] < dep[f2]) swap(f1, f2), swap(u, v);
-			func(dfn[f1], dfn[u], val);
-			u = par[f1]; f1 = top[u];
+			func(dfn[f1], dfn[u], val...);
+			u = fa[f1]; f1 = top[u];
 		}
 		if (dep[u] < dep[v]) swap(u, v);
-		if (u != v) func(dfn[hson[v]], dfn[u], val); // change here if you want the info on vertices.
+		func(dfn[v], dfn[u], val...); // change here if you want the info on edges.
 	}
 
-	// the following function is for info on edges.
-	template<class T> T ask(const function<T(int, int)> &func, int u, int v) {
+	template<class T>
+	T chainAsk(int u, int v, const function<T(int, int)> &func) {
 		int f1 = top[u], f2 = top[v];
-		T ans = 0;
+		T ans{};
 		while (f1 != f2) {
 			if (dep[f1] < dep[f2]) swap(f1, f2), swap(u, v);
-			ans += func(dfn[f1], dfn[u]);
-			u = par[f1]; f1 = top[u];
+			ans = ans + func(dfn[f1], dfn[u]);
+			u = fa[f1]; f1 = top[u];
 		}
 		if (dep[u] < dep[v]) swap(u, v);
-		if (u != v) ans += func(dfn[hson[v]], dfn[u]); // change here if you want the info on vertices.
+		ans = ans + func(dfn[v], dfn[u]); // change here if you want the info on edges.
 		return ans;
 	}
 };
