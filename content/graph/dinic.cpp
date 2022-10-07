@@ -1,9 +1,9 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-03
- * Description: Dinic algorithm for max flow.
- * Time: O(n^2 m) for arbitrary networks. O(m \sqrt{n}) for bipartite/unit network. O(min{|V|^(2/3), |E|^(1/2)} |E|) for networks with only unit capacities.
- * Usage: Always run $MaxFlow(src, sink)$ for some $src$ and $sink$ first. Then you can run $getMinCut$ to obtain a Minimum Cut. Note that in the returned cut, vertices in the same part as $src$ are marked with $1$.
+ * Date: 22-10-08
+ * Description: Dinic algorithm for flow graph $G = (V, E)$.
+ * Usage: Always run $MaxFlow(src, sink)$ for some $src$ and $sink$ first. Then you can run $getMinCut$ to obtain a Minimum Cut (vertices in the same part as $src$ are returned).
+ * Time: O(|V|^2 |E|) for arbitrary networks. O(|E| \sqrt{|V|}) for bipartite/unit network. O(min{|V|^(2/3), |E|^(1/2)} |E|) for networks with only unit capacities.
  * Status: tested on https://codeforces.com/gym/103861/problem/H. Seems to be fast enough now.
  *  getDirFlow() and getUndirFlow() are not tested yet.
  */
@@ -44,7 +44,7 @@ template<class Cap = int, Cap F_MAX = numeric_limits<Cap>::max()> struct Dinic {
 		};
 
 		vi cur;
-		auto dfs = [&](auto dfs, int now, Cap flow) {
+		auto dfs = [&](auto &dfs, int now, Cap flow) {
 			if (now == sink) return flow;
 			Cap res = 0;
 			for (int &id = cur[now]; id < sz(g[now]); id++) {
