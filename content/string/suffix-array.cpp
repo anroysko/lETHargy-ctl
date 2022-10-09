@@ -1,9 +1,12 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-24
- * Description: Suffix Array for non-cyclic string.
+ * Date: 22-09-25
+ * Description: Suffix Array for non-cyclic string $s = s_0...s_{n - 1}$. 
+ *  $rank[i]$ records the rank of the $i$-th suffix $s_i...s_{n - 1}$.
+ *  $sa[i]$ records the starting position of the $i$-th smallest suffix.
+ *  $h[i]$ (also called height array or lcp array) records the lcp of the $sa[i]$-th suffix and the $sa[i + 1]$-th suffix in $s$.
  * Time: O(|s| \log |s|).
- * Status: tested on https://www.luogu.com.cn/record/87444853, https://www.luogu.com.cn/problem/P4094, https://ac.nowcoder.com/acm/contest/33186/B, https://codeforces.com/gym/102994/problem/D, https://ac.nowcoder.com/acm/contest/33195/D.
+ * Status: tested on https://www.luogu.com.cn/record/87444853, https://www.luogu.com.cn/problem/P4094, https://ac.nowcoder.com/acm/contest/33186/B, https://codeforces.com/gym/102994/problem/D, https://ac.nowcoder.com/acm/contest/33195/D, https://www.luogu.com.cn/problem/P8023, https://www.luogu.com.cn/problem/P7769.
  */
 
 struct SA {
@@ -17,7 +20,7 @@ struct SA {
 		iota(all(sa), 0);
 		n++;
 
-		for (int len = 0; len < n; len = (len ? len * 2 : 1)) {
+		for (int len = 0; len < n; len = len ? len * 2 : 1) {
 			vi cnt(n + 1);
 			for (auto v : rank) cnt[v + 1]++;
 			rep(i, 1, n - 1) cnt[i] += cnt[i - 1];
@@ -34,7 +37,7 @@ struct SA {
 			int r = 0, oldp = -1;
 			for (auto p: sa) {
 				auto next = [&](int a, int b) { return a + b < n ? a + b : a + b - n; };
-				if (~oldp) r += (rank[p] != rank[oldp]) || (rank[next(p, len)] != rank[next(oldp, len)]);
+				if (~oldp) r += rank[p] != rank[oldp] || rank[next(p, len)] != rank[next(oldp, len)];
 				nrank[p] = r;
 				oldp = p;
 			}
@@ -45,7 +48,8 @@ struct SA {
 		rep(i, 0, n - 1) rank[sa[i]] = i;
 
 		// compute height array.
-		for (int i = 0, len = 0; i < n; ++i) {
+		int len = 0;
+		rep(i, 0, n - 1) {
 			if (len) len--;
 			int rk = rank[i];
 			if (rk == n - 1) continue;

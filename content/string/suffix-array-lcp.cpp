@@ -3,7 +3,7 @@
  * Date: 22-09-24
  * Description: Suffix Array with sparse table answering lcp of suffices.
  * Time: O(|s| \log |s|) for construction. O(1) per query.
- * Status: tested on https://ac.nowcoder.com/acm/contest/33186/B, https://codeforces.com/gym/102994/problem/D, https://ac.nowcoder.com/acm/contest/33195/D, https://www.luogu.com.cn/problem/P4094.
+ * Status: tested on https://ac.nowcoder.com/acm/contest/33186/B, https://codeforces.com/gym/102994/problem/D, https://ac.nowcoder.com/acm/contest/33195/D, https://www.luogu.com.cn/problem/P4094, https://www.luogu.com.cn/problem/P7769.
  */
 
 #include "suffix-array.cpp"
