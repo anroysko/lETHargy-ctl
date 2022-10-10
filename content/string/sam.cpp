@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-03
+ * Date: 22-10-11
  * Description: Suffix Automaton. (Using map to store sons makes it 2~3 times slower but it should be fine in most cases.)
  *  $len$ is the length of the longest substring corresponding to the state. 
  *  $fa$ is the father in the prefix tree. Note that fa[i] < i doesn't hold.
@@ -10,25 +10,26 @@
  * Status: tested on https://ac.nowcoder.com/acm/contest/884/I, https://ac.nowcoder.com/acm/contest/33188/H, https://codeforces.com/gym/101194/problem/F, https://nanti.jisuanke.com/t/A2018, https://darkbzoj.cc/problem/3238, https://nanti.jisuanke.com/t/A1623, https://www.spoj.com/problems/NSUBSTR/en/, https://codeforces.com/contest/235/problem/C.
  */
 
-struct SAM {
+template<class T> struct SAM {
 	struct node { /// start-hash
 		map<int, int> nxt;
 		int fa, len;
-		int occ, pos; // end of prefix
+		int occ, pos; // # of occurrence (as prefix) & endpos.
 		node(int fa, int len): fa(fa), len(len) {
 			occ = pos = 0;
 		}
 	};
 
+	T s;
 	int n;
 	vector<node> t;
-	vi at; // at[i] = the state at which the i-th prefix is.
-	SAM(const string &str): n(sz(str)), at(n) {
+	vi at; // at[i] = the state at which the i-th prefix of s is.
+
+	SAM(const T &s): s(s), n(sz(s)), at(n) {
 		t.emplace_back(-1, 0);
 		int last = 0; // create root.
 
-		rep(i, 0, n - 1) {
-			int c = str[i];
+		auto ins = [&](int i, int c) {
 			int now = last;
 			t.emplace_back(-1, t[now].len + 1);
 			last = sz(t) - 1;
@@ -58,7 +59,9 @@ struct SAM {
 					}
 				}
 			}
-		}
+		};
+
+		rep(i, 0, n - 1) ins(i, s[i]);
 	} /// end-hash
 
 	void calOccurrence() { /// start-hash
@@ -68,5 +71,16 @@ struct SAM {
 		rep(i, 0, sz(t) - 1) que[--sum[t[i].len]] = i;
 		reverse(all(que));
 		for (auto now: que) if (now != 0) t[t[now].fa].occ += t[now].occ;
+	} /// end-hash
+
+	vector<vi> ReversedPrefixTree() { /// start-hash
+		vector<vi> g(sz(t));
+		rep(now, 1, sz(t) - 1) g[t[now].fa].push_back(now);
+		rep(now, 0, sz(t) - 1) {
+			sort(all(g[now]), [&](int i, int j) {
+				return s[t[i].pos - t[now].len] < s[t[j].pos - t[now].len];
+			});
+		}
+		return g;
 	} /// end-hash
 };
