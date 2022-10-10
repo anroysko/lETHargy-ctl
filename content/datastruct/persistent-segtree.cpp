@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-25
+ * Date: 22-10-11
  * Description: Persistent Segment Tree. Point apply and thus no lazy propogation.
  * Usage: Always define a global apply function to tell segment tree how you apply modification. 
  *  Combine is set as plus so if you just let T be numerical type then you have range sum in the info and as range query result. To have something different, say rangeMin, define a struct with constructer and + operation.
@@ -19,10 +19,10 @@ public:
 		t.reserve(q * (__lg(n) + 2) + 1);
 	}
 
-	// return new root id.
+	// pointApply returns the id of new root.
 	template<class... T>
 	int pointApply(int rt, int pos, const T&... val) {
-		auto dfs = [&](auto dfs, int &i, int l, int r) {
+		auto dfs = [&](auto &dfs, int &i, int l, int r) {
 			t.push_back(t[i]);
 			i = sz(t) - 1;
 			::apply(t[i].info, val...);
@@ -38,7 +38,7 @@ public:
 
 	Info rangeAsk(int rt, int ql, int qr) {
 		Info res{};
-		auto dfs = [&](auto dfs, int i, int l, int r) {
+		auto dfs = [&](auto &dfs, int i, int l, int r) {
 			if (i == 0 || qr < l || r < ql) return;
 			if (ql <= l && r <= qr) {
 				res = res + t[i].info;
@@ -52,16 +52,16 @@ public:
 		return res;
 	} /// end-hash
 
-	// lower_bound on prefices of difference between two versions.
+	// lower_bound on prefix sums of difference between two versions.
 	int lower_bound(int rt_l, int rt_r, Info val) { /// start-hash
 		Info sum{};
-		auto dfs = [&](auto dfs, int x ,int y, int l, int r) {
+		auto dfs = [&](auto &dfs, int x ,int y, int l, int r) {
 			if (l == r) return sum + t[y].info - t[x].info >= val ? l : l + 1;
 			int mid = (l + r) >> 1;
 			Info s = t[t[y].ls].info - t[t[x].ls].info;
 			if (sum + s >= val) return dfs(dfs, t[x].ls, t[y].ls, l, mid);
 			else {
-				sum += s;
+				sum = sum + s;
 				return dfs(dfs, t[x].rx, t[y].rs, mid + 1, r);
 			}
 		};
