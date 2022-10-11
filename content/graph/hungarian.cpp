@@ -1,6 +1,6 @@
 /** 
  * Author: Yuhao Yao
- * Date: 22-08-07
+ * Date: 22-10-11
  * Description: Given a complete bipartite graph $G = (L \cup, R, E)$, where $|L| \le |R|$, Finds minimum weighted perfect matching of $L$. Returns the matching.
  * Usage: $ws[i][j]$ is the weight of the edge from $i$-th vertex in $L$ to $j$-th vertex in $R$.
  * Not sure how to choose safe $T$ since I can not give a bound on values in $lp$ and $rp$. Seems safe to always use \textbf{long long}.
@@ -28,8 +28,7 @@ vector<pii> Hungarian(const vector<vector<T>> &ws) {
 						swap(lm[i], j);
 					}
 					return 1;
-				}
-				else que.push_back(rm[j]);
+				} else que.push_back(rm[j]);
 			}
 			return 0;
 		};
