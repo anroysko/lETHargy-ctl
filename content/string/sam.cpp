@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-11
+ * Date: 22-10-12
  * Description: Suffix Automaton. (Using map to store sons makes it 2~3 times slower but it should be fine in most cases.)
  *  $len$ is the length of the longest substring corresponding to the state. 
  *  $fa$ is the father in the prefix tree. Note that fa[i] < i doesn't hold.
@@ -15,7 +15,7 @@ template<class T> struct SAM {
 		map<int, int> nxt;
 		int fa, len;
 		int occ, pos; // # of occurrence (as prefix) & endpos.
-		node(int fa, int len): fa(fa), len(len) {
+		node(int fa = -1, int len = 0): fa(fa), len(len) {
 			occ = pos = 0;
 		}
 	};
@@ -26,7 +26,7 @@ template<class T> struct SAM {
 	vi at; // at[i] = the state at which the i-th prefix of s is.
 
 	SAM(const T &s): s(s), n(sz(s)), at(n) {
-		t.emplace_back(-1, 0);
+		t.emplace_back();
 		int last = 0; // create root.
 
 		auto ins = [&](int i, int c) {
