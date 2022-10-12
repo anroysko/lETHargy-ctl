@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-08
+ * Date: 22-10-12
  * Description: Dinic algorithm for flow graph $G = (V, E)$.
  * Usage: Always run $MaxFlow(src, sink)$ for some $src$ and $sink$ first. Then you can run $getMinCut$ to obtain a Minimum Cut (vertices in the same part as $src$ are returned).
  * Time: O(|V|^2 |E|) for arbitrary networks. O(|E| \sqrt{|V|}) for bipartite/unit network. O(min{|V|^(2/3), |E|^(1/2)} |E|) for networks with only unit capacities.
@@ -8,7 +8,8 @@
  *  getDirFlow() and getUndirFlow() are not tested yet.
  */
 
-template<class Cap = int, Cap F_MAX = numeric_limits<Cap>::max()> struct Dinic {
+template<class Cap = int, Cap Cap_MAX = numeric_limits<Cap>::max()>
+struct Dinic {
 	/// start-hash
 	int n;
 	struct E { int to; Cap a; }; // Endpoint & Admissible flow.
@@ -47,8 +48,8 @@ template<class Cap = int, Cap F_MAX = numeric_limits<Cap>::max()> struct Dinic {
 		auto dfs = [&](auto &dfs, int now, Cap flow) {
 			if (now == sink) return flow;
 			Cap res = 0;
-			for (int &id = cur[now]; id < sz(g[now]); id++) {
-				int i = g[now][id];
+			for (int &ind = cur[now]; ind < sz(g[now]); ind++) {
+				int i = g[now][ind];
 				auto [v, c] = es[i];
 				if (c > 0 && dis[v] == dis[now] - 1) {
 					Cap x = dfs(dfs, v, min(flow - res, c));
@@ -64,7 +65,7 @@ template<class Cap = int, Cap F_MAX = numeric_limits<Cap>::max()> struct Dinic {
 		Cap ans = 0;
 		while (revbfs()) {
 			cur.assign(n, 0);
-			ans += dfs(dfs, src, F_MAX);
+			ans += dfs(dfs, src, Cap_MAX);
 		}
 		return ans;
 	} /// end-hash
