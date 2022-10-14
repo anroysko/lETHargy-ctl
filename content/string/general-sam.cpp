@@ -33,7 +33,7 @@ struct GSAM {
 			else {
 				int p = t[now].nxt[c];
 				if (t[p].len == t[now].len + 1) t[last].fa = p;
-				else {
+				else { // clone a node np from node p.
 					t.emplace_back();
 					int np = sz(t) - 1;
 					for (auto [i, v]: t[p].nxt) if (t[v].len > 0) {
