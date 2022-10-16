@@ -1,8 +1,9 @@
 /**
  * Author: Yuhao Yao
+ * Date: 2022-10-16
  * Description: 2D segment tree. Point apply and thus no lazy propogation.
  * Usage: Always define a global apply function to tell segment tree how you apply modification. 
- *  Combine is set as plus so if you just let T be numerical type then you have range sum in the info and as range query result. To have something different, say rangeMin, define a struct with constructer and + operation.
+ *  Combine is set as plus so if you just let $T$ be numerical type then you have range sum in the info and as range query result. To have something different, say rangeMin, define a struct with constructer and + operation.
  * Time: O(\log^2 N) per operation.
  * Status: tested on https://official.contest.yandex.com/opencupXXII/contest/35263/problems/J/?success=69334197#7/2022_01_31/pBnYMDpTsu.
  */
