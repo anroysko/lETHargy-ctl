@@ -2,7 +2,7 @@
  * Author: Yuhao Yao
  * Source: Adapted from https://qoj.ac/submission/27364.
  * Date: 22-09-26
- * Desctiption: Manacher Algorithm for finding all palindrome subtrings of $s = s_0...s_{n - 1}$. $s$ can actually be string or vector (say vector<int>).
+ * Description: Manacher Algorithm for finding all palindrome subtrings of $s = s_0...s_{n - 1}$. $s$ can actually be string or vector (say vector<int>).
  *  For returned vector $len$, $len[i * 2] = r$ means that $s_{i - r + 1}...s_{i + r - 1}$ is the maximal palindrome centered at position $i$.
  *  For returned vector $len$, $len[i * 2 + 1] = r$ means that $s_{i - r + 1}...s_{i + r}$ is the maximal palindrome centered between position $i$ and $i + 1$.
  * Time: O(|s|).
