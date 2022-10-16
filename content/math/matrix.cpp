@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-06
+ * Date: 22-10-16
  * Description: Matrix struct. Used for Gaussian elimination or inverse of matrix.
  * Usage: To solve $A x =  b^\top$, call $SolveLinear(A, b)$.
  *  Besides, you need function $isZero$ for your template $T$.
