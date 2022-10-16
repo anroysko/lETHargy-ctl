@@ -5,7 +5,8 @@
  * Usage: To solve $A x =  b^\top$, call SolveLinear(A, b).
  *  Besides, you need function $isZero$ for your template $T$.
  * Time: O(n m \min\{n, m\}) for Gaussian, inverse and SolveLinear.
- * Status: inverse is tested on https://ac.nowcoder.com/acm/contest/33187/J; SolveLinear is not tested yet.
+ * Status: inverse is tested on https://ac.nowcoder.com/acm/contest/33187/J; 
+ *  SolveLinear tested on https://www.luogu.com.cn/problem/P6125.
  */
 
 template<class T> struct Matrix {
@@ -53,7 +54,7 @@ template<class T> struct Matrix {
 		return res;
 	}
 
-	// do elimination for the first C columns, return the rank.
+	// Do elimination for the first C columns, return the rank.
 	int Gaussian(int C) {
 		int n = sz(a), m = sz(a[0]), rk = 0;
 		assert(C <= m);
@@ -88,16 +89,16 @@ template<class T> struct Matrix {
 	friend pair<bool, Vec> SolveLinear(Mat A, const Vec &b) {
 		#define revrep(i, a, n) for (auto i = n; i >= (a); --i)
 
-		int n = sz(b);
-		assert(sz(A.a) == n);
+		int n = sz(A.a), m = sz(A[0]);
+		assert(sz(b) == n);
 		rep(i, 0, n - 1) A[i].push_back(b[i]);
-		int rk = A.Gaussian(sz(A[0]) - 1);
+		int rk = A.Gaussian(m);
 		rep(i, rk, n - 1) if (!::isZero(A[i].back())) return {0, Vec{}};
-		Vec res(n);
-		reverep(i, 0, n - 1) {
-			T x = b[i];
+		Vec res(m);
+		revrep(i, 0, rk - 1) {
+			T x = A[i][m];
 			int last = -1;
-			revrep(j, 0, sz(A[0]) - 1) if (!::isZero(A[i][j])) {
+			revrep(j, 0, m - 1) if (!::isZero(A[i][j])) {
 				x -= A[i][j] * res[j];
 				last = j;
 			}
