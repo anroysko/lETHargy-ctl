@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-12
+ * Date: 22-10-16
  * Description: Dinic algorithm for flow graph $G = (V, E)$.
  * Usage: Always run $MaxFlow(src, sink)$ for some $src$ and $sink$ first. Then you can run $getMinCut$ to obtain a Minimum Cut (vertices in the same part as $src$ are returned).
  * Time: O(|V|^2 |E|) for arbitrary networks. O(|E| \sqrt{|V|}) for bipartite/unit network. O(min{|V|^(2/3), |E|^(1/2)} |E|) for networks with only unit capacities.
@@ -10,8 +10,7 @@
 
 template<class Cap = int, Cap Cap_MAX = numeric_limits<Cap>::max()>
 struct Dinic {
-	/// start-hash
-	int n;
+	int n; /// start-hash
 	struct E { int to; Cap a; }; // Endpoint & Admissible flow.
 	vector<E> es;
 	vector<vi> g;
