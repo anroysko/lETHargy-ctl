@@ -5,7 +5,7 @@
  * Description: Solves a general linear maximization problem: maximize $c^T x$ subject to $Ax \le b$, $x \ge 0$. Returns \{$res$, $x$\}:
  * $res = 0$ if the program is infeasible; $res = 1$ if there exists an optimal solution; $res = 2$ if the program is unbounded. 
  * $x$ is valid only when $res = 1$.
- * Time: O(NM * \#pivots), where $N# is the number of constraints and $M$ is the number of variables.
+ * Time: O(NM * \#pivots), where $N$ is the number of constraints and $M$ is the number of variables.
  * Status: tested on https://acm.hdu.edu.cn/showproblem.php?pid=6248.
  */
 

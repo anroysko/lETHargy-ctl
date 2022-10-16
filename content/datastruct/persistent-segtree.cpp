@@ -3,7 +3,7 @@
  * Date: 22-10-11
  * Description: Persistent Segment Tree. Point apply and thus no lazy propogation.
  * Usage: Always define a global apply function to tell segment tree how you apply modification. 
- *  Combine is set as plus so if you just let T be numerical type then you have range sum in the info and as range query result. To have something different, say rangeMin, define a struct with constructer and + operation.
+ *  Combine is set as plus so if you just let $T$ be numerical type then you have range sum in the info and as range query result. To have something different, say rangeMin, define a struct with constructer and + operation.
  * Time: O(\log N) per operation.
  * Status: tested on https://codeforces.com/contest/1479/problem/D, https://www.luogu.com.cn/problem/P7361, https://www.luogu.com.cn/problem/P4094.
  */
