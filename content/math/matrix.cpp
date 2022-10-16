@@ -1,8 +1,8 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-07-23
+ * Date: 22-10-06
  * Description: Matrix struct. Used for Gaussian elimination or inverse of matrix.
- * Usage: To solve $A x =  b^\top$, call SolveLinear(A, b).
+ * Usage: To solve $A x =  b^\top$, call $SolveLinear(A, b)$.
  *  Besides, you need function $isZero$ for your template $T$.
  * Time: O(n m \min\{n, m\}) for Gaussian, inverse and SolveLinear.
  * Status: inverse is tested on https://ac.nowcoder.com/acm/contest/33187/J; 
