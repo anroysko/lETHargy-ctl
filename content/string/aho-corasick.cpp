@@ -4,7 +4,7 @@
  * Description: Aho_Corasick Automaton of strings $s_0, ..., s_{n - 1}$.
  * Usage: Aho_Corasick<'a', 26> ac; for strings consisting of lowercase letters. Call ac.build() after you insert all strings $s_0, ..., s_{n - 1}$.
  * Time: O(\sum_{i = 0}^{n - 1} |s_i|).
- * Status: tested on http://ejudge.opencup.org/~ejudge/team.cgi?contest_id=2744 (problem M).
+ * Status: tested on http://ejudge.opencup.org/~ejudge/team.cgi?contest_id=2744 (problem M), https://www.luogu.com.cn/problem/P6125.
  */
 template<char st, int C> struct Aho_Corasick {
 	struct node {
