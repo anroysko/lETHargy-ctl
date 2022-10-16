@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-12
+ * Date: 22-10-16
  * Description: Successive Shortest Path for flow graph $G = (V, E)$.
  * Usage: Always run $mincostflow(src, sink)$ for some $src$ and $sink$ to get the minimum cost and the maximum flow.
  * Time: O(|F| |E|\log{|E|}) for non-negative costs. O(|V| |E| + |F| |E|\log{|E|}) for arbitrary costs.
@@ -26,8 +26,8 @@ struct SuccessiveShortestPath {
 		// Run Bellman-Ford first if necessary.
 		h.assign(n, Cost_MAX);
 		h[src] = 0;
-		rep(rd, 1, n) rep(now, 0, n - 1) for (auto ind: g[now]) {
-			auto [v, c, w] = es[ind];
+		rep(rd, 1, n) rep(now, 0, n - 1) for (auto i: g[now]) {
+			auto [v, c, w] = es[i];
 			if (c > 0) h[v] = min(h[v], h[now] + w);
 		}
 		// Bellman-Ford stops here.
@@ -45,13 +45,13 @@ struct SuccessiveShortestPath {
 				// Using mark[] is safer than compare -d and dis[now] when the Cost = double.
 				if (mark[now]) continue;
 				mark[now] = 1;
-				for (auto ind: g[now]) {
-					auto [v, c, w] = es[ind];
+				for (auto i: g[now]) {
+					auto [v, c, w] = es[i];
 					Cost off = dis[now] + w + h[now] - h[v];
 					if (c > 0 && dis[v] > off) {
 						dis[v] = off;
 						pq.emplace(-dis[v], v);
-						pre[v] = ind;
+						pre[v] = i;
 					}
 				}
 			}
@@ -59,8 +59,8 @@ struct SuccessiveShortestPath {
 			
 			rep(i, 0, n - 1) if (dis[i] != Cost_MAX) h[i] += dis[i];
 			Cap aug = mx_flow;
-			for (int ind = pre[sink]; ~ind; ind = pre[es[ind ^ 1].to]) aug = min(aug, es[ind].a);
-			for (int ind = pre[sink]; ~ind; ind = pre[es[ind ^ 1].to]) es[ind].a -= aug, es[ind ^ 1].a += aug;
+			for (int i = pre[sink]; ~i; i = pre[es[i ^ 1].to]) aug = min(aug, es[i].a);
+			for (int i = pre[sink]; ~i; i = pre[es[i ^ 1].to]) es[i].a -= aug, es[i ^ 1].a += aug;
 			mx_flow -= aug;
 			flow += aug;
 			cost += aug * h[sink];
