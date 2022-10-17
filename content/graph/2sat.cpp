@@ -1,18 +1,20 @@
 /**
  * Author: Yuhao Yao
- * Description: 2SAT solver, returns if a 2SAT problem is satisfiable. If yes, it also gives an assignment.
- * Usage: For example, if you want to add clause (not x) or (y), just call addclause(x, 0, y, 1);
- * Time: O(|V| + |C|)
+ * Date: 22-10-17
+ * Description: 2SAT solver, returns if a 2SAT system of $V$ variables and $C$ constraints is satisfiable. If yes, it also gives an assignment.
+ * Usage: For example, if you want to add clause $\neg x \lor y$, just call addClause(x, 0, y, 1);
+ * Time: O(|V| + |C|).
+ * Status: tested on https://codeforces.com/gym/103260/problem/E.
  */
 
-class TwoSat {
+struct TwoSat {
 	int n;
 	vector<vi> e;
-	vector<bool> ans;
-public:
+	vi ans;
+
 	TwoSat(int n): n(n), e(n * 2), ans(n) {}
 
-	void addclause(int x, bool f, int y, bool g) {
+	void addClause(int x, bool f, int y, bool g) {
 		e[x * 2 + !f].push_back(y * 2 + g);
 		e[y * 2 + !g].push_back(x * 2 + f);
 	}
@@ -21,12 +23,12 @@ public:
 		vi id(n * 2, -1), dfn(n * 2, -1), low(n * 2, -1), sta;
 		int cnt = 0, scc = 0;
 
-		function<void(int)> dfs = [&](int now) {
+		auto dfs = [&](auto &dfs, int now) -> void {
 			dfn[now] = low[now] = cnt++;
 			sta.push_back(now);
 			for (auto v: e[now]) {
 				if (dfn[v] == -1) {
-					dfs(v);
+					dfs(dfs, v);
 					low[now] = min(low[now], low[v]);
 				} else if (id[v] == -1) low[now] = min(low[now], dfn[v]);
 			}
@@ -41,7 +43,7 @@ public:
 			}
 		};
 
-		rep(i, 0, n * 2 - 1) if (dfn[i] == -1) dfs(i);
+		rep(i, 0, n * 2 - 1) if (dfn[i] == -1) dfs(dfs, i);
 		rep(i, 0, n - 1) {
 			if (id[i * 2] == id[i * 2 + 1]) return 0;
 			ans[i] = id[i * 2] > id[i * 2 + 1];
@@ -49,5 +51,5 @@ public:
 		return 1;
 	}
 
-	vector<bool> getass() { return ans; }
+	vi getAss() { return ans; }
 };
