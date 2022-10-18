@@ -29,7 +29,7 @@ template<int L> struct v3 {
 	v3 operator -(const v3 &rhs) const {
 		v3 tmp = rhs;
 		swap(tmp.a[1], tmp.a[2]);
-		return operator +(tmp);
+		return *this + tmp;
 	}
 	v3 operator *(int rhs) const {
 		if (rhs % 3 == 0) return v3{};
@@ -41,7 +41,7 @@ template<int L> struct v3 {
 	}
 	v3 operator /(int rhs) const {
 		assert(rhs % 3 != 0); 
-		return operator *(rhs);
+		return *this * rhs;
 	} /// end-hash
 
 	friend string to_string(const v3 &a) {
