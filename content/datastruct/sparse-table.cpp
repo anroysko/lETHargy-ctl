@@ -1,7 +1,7 @@
 /**
  * Author: Yuhao Yao
  * Date: 22-10-20
- * Description: Sparse Table.
+ * Description: Sparse Table of an array of length $N$.
  * Time: O(N \log N) for construction, O(1) per query.
  * Status: tested on https://qoj.ac/contest/695/problem/1857, https://codeforces.com/gym/103371/problem/M.
  */
