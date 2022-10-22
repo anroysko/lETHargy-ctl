@@ -1,8 +1,8 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-12
- * Description: Fast bipartite matching for bipartite graph. You can also get a vertex cover of a bipartite graph easily.
- * Time: O(|E| \sqrt{|V|}).
+ * Date: 22-10-22
+ * Description: Fast bipartite matching for bipartite graph $G = (L \cup R, E)$. You can also get a vertex cover of a bipartite graph easily.
+ * Time: O(|E| \sqrt{|L| + |R|}).
  * Status: vertex cover correctness is tested on https://ac.nowcoder.com/acm/contest/885/F.
  */
 
