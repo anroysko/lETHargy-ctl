@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-13
+ * Date: 22-10-12
  * Description: Segment tree with lazy propogation.
  * Usage: Always define global apply functions (for both Info and Tag) to tell segment tree how you apply modification.
  *  Combine is set as plus so if you just let T be numerical type then you have range sum in the info and as range query result. To have something different, say rangeMin, define a struct with constructer and + operation.
@@ -36,8 +36,8 @@ private:
 
 	template<class... T>
 	void apply(int i, int l, int r, const T&... val) {
-		::apply(info[i], l, r, val...);
-		::apply(tag[i], l, r, val...);
+		::infoApply(info[i], l, r, val...);
+		::tagApply(tag[i], l, r, val...);
 	}
 
 	void push(int i, int l, int r) {
