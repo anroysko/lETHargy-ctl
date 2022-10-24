@@ -1,9 +1,9 @@
 /**
  * Author: Yuhao Yao
  * Date: 22-10-23
- * Description: Given a ground set $S$ and two matroid $M_1 = (S, I_1)$ and $M_2 = (S, I_2)$, compute a largest independent set in their intersection $M = (S, I_1 \cap I_2)$, i.e. an element in $I_1 \cap I_2$ of largest size.
- * Usage: Denote $as$ by the ground set. $rebuild$ should be $function<void(const vector<T>&)>$ such that $rebuild(A)$ rebuilds the data structure using elements in $A$. Then $check1(x)$ returns if $A \cup \{x\} \in I_1$ and $check2$ returns if $A \cup \{x\} \in I_2$ using the data structure just built before.
- * Time: O(r^2 n), where $r = min(r(S, I_1), r(S, I_2))$.
+ * Description: Given a ground set $E$ and two matroid $M_1 = (E, I_1)$ and $M_2 = (E, I_2)$, compute a largest independent set in their intersection $M = (E, I_1 \cap I_2)$, i.e. an element in $I_1 \cap I_2$ of largest size.
+ * Usage: Denote $as$ by the ground set. $rebuild$ should be $function<void(const vector<T>\&)>$ such that $rebuild(A)$ rebuilds the data structure using elements in $A$. Then $check1(x)$ returns if $A \cup \{x\} \in I_1$ and $check2$ returns if $A \cup \{x\} \in I_2$ using the data structure just built before.
+ * Time: O(r^2 n), where $r = min(r(E, I_1), r(E, I_2))$.
  * Status: tested on https://codeforces.com/gym/102156/problem/D, https://codeforces.com/gym/101561/problem/B, https://official.contest.yandex.com/opencupXXII/contest/37753/problems/B/.
 **/
 template<class T>

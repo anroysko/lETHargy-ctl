@@ -1,7 +1,7 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-21
- * Desciption: Chinese Remainder Theorem for solveing equations $x \equiv a_i (\mod m_i)$ for $i = 0, 1, ..., n - 1$. \textbf{Note that} you need to choose type $T$ to fit $(\prod_{i} m_i) \cdot (\max_{i} m_i)$.
+ * Date: 22-10-24
+ * Description: Chinese Remainder Theorem for solveing equations $x \equiv a_i (mod~ m_i)$ for $i = 0, 1, ..., n - 1$ such that all $m_i$-s are pairwise-coprime. \textbf{Note that} you need to choose type $T$ to fit $(\prod_{i} m_i) \cdot (\max_{i} m_i)$.
  * Time: O(n \log (\prod_{i = 0}^{n - 1} m_i)).
  * Status: tested on https://codeforces.com/gym/102056/problem/C.
 **/
