@@ -1,14 +1,12 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-22
- * Description: Fast bipartite matching for bipartite graph $G = (L \cup R, E)$. You can also get a vertex cover of a bipartite graph easily.
+ * Date: 22-10-23
+ * Description: Fast bipartite matching for \textbf{bipartite} graph $G = (L \cup R, E)$. Edges $E$ should be described as pairs such that pair $(x, y)$ means that there is an edge between the $x$-th vertex in $L$ and the $y$-th vertex in $R$. You can also get a vertex cover of a bipartite graph easily. 
  * Time: O(|E| \sqrt{|L| + |R|}).
  * Status: vertex cover correctness is tested on https://ac.nowcoder.com/acm/contest/885/F.
  */
-
-struct Hopcroft {
-	/// start-hash
-	int L, R;
+struct Hopcroft {	
+	int L, R; /// start-hash
 	vi lm, rm; // record the matched vertex for each vertex on both sides.
 	vi ldis, rdis; // put it here so you can get vertex cover easily.
 
@@ -54,8 +52,7 @@ struct Hopcroft {
 		}
 	} /// end-hash
 	
-	// returns vertices matched to left part, -1 means not matched.
-	vi getMatch() { return lm; }
+	vi getMatch() { return lm; } // returns lm.
 
 	pair<vi, vi> vertex_cover() { /// start-hash
 		vi lvc, rvc;

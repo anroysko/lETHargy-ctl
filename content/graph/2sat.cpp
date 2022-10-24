@@ -1,8 +1,8 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-17
+ * Date: 22-10-24
  * Description: 2SAT solver, returns if a 2SAT system of $V$ variables and $C$ constraints is satisfiable. If yes, it also gives an assignment.
- * Usage: For example, if you want to add clause $\neg x \lor y$, just call addClause(x, 0, y, 1);
+ *  Call $addClause$ to add clauses. For example, if you want to add clause $\neg x \lor y$, just call $addClause(x, 0, y, 1)$.
  * Time: O(|V| + |C|).
  * Status: tested on https://codeforces.com/gym/103260/problem/E.
  */

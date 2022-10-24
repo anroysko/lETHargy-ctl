@@ -1,18 +1,19 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-04
+ * Date: 22-10-24
  * Description: Compute the Vertex-BiConnected Components of a graph $G = (V, E)$ (not necessarily connected). 
  *  Multiple edges and self loops are allowed.
- *  $id[i]$ records the index of bcc the edge $i$ is in.
- *  $top[u]$ records the second highest vertex (which is unique) in the bcc which vertex $u$ is in.
+ *  $id[i]$ records the index of bcc the $i$-th edge is in.
+ *  $top[u]$ records the second highest vertex (which is unique) in the bcc which vertex $u$ is in. (Just for checking if two vertices are in the same bcc.)
+ *  This code also builds the block forest: $bf$ records the edges in the block forest, where the $i$-th bcc corresponds to the $(n + i)$-th node. Call $getBlockForest()$ to get the adjacency list.
  * Time: O(|V| + |E|).
  * Status: tested on https://codeforces.com/gym/102900/problem/K, https://www.luogu.com.cn/problem/P4630, https://codeforces.com/contest/487/problem/E, https://www.luogu.com.cn/problem/P4606.
  */
-
 struct VertexBCC {
-	int n, bcc;
+	int n, bcc; /// start-hash
 	vi id, top, fa;
 	vector<pii> bf; // edges of the block-forest.
+
 	VertexBCC(int n, const vector<pii> &es): n(n), bcc(0), id(sz(es)), top(n), fa(n, -1) {
 		vvi g(n);
 		rep(ind, 0, sz(es) - 1) {
@@ -59,10 +60,19 @@ struct VertexBCC {
 			dfs(dfs, i);
 			top[i] = i;
 		}
-	}
-	bool SameBcc(int x, int y) {
+	} /// end-hash
+	
+	bool SameBcc(int x, int y) { /// start-hash
 		if (x == fa[top[y]] || y == fa[top[x]]) return 1;
 		else return top[x] == top[y];
-	}
-	vector<pii> getBlockForest() { return bf; }
+	} /// end-hash
+	
+	vector<vi> getBlockForest() { /// start-hash
+		vvi g(n + bcc);
+		for (auto [x, y]: bf) {
+			g[x].push_back(y);
+			g[y].push_back(x);
+		}
+		return g;
+	} /// end-hash
 };

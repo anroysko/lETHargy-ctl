@@ -1,15 +1,15 @@
 /** 
  * Author: Yuhao Yao
- * Date: 22-10-11
- * Description: Given a complete bipartite graph $G = (L \cup, R, E)$, where $|L| \le |R|$, Finds minimum weighted perfect matching of $L$. Returns the matching.
- * Usage: $ws[i][j]$ is the weight of the edge from $i$-th vertex in $L$ to $j$-th vertex in $R$.
- * Not sure how to choose safe $T$ since I can not give a bound on values in $lp$ and $rp$. Seems safe to always use \textbf{long long}.
+ * Date: 22-10-23
+ * Description: Given a complete bipartite graph $G = (L \cup R, E)$, where $|L| \le |R|$, Finds minimum weighted perfect matching of $L$. Returns the matching (a vector of pair<int, int>).
+ *  $ws[i][j]$ is the weight of the edge from $i$-th vertex in $L$ to $j$-th vertex in $R$.
+ *  Not sure how to choose safe $T$ since I can not give a bound on values in $lp$ and $rp$. Seems safe to always use \textbf{long long}.
  * Time: O(|L|^2 |R|).
  * Status: Seems to be fast enough. Tested on https://www.luogu.com.cn/problem/P6577, https://codeforces.com/gym/101635/problem/G, https://codeforces.com/gym/101194/problem/J.
  */
 template<class T = ll, T INF = numeric_limits<T>::max()>
 vector<pii> Hungarian(const vector<vector<T>> &ws) {
-	int L = sz(ws), R = sz(ws[0]);
+	int L = sz(ws), R = L == 0 ? 0 : sz(ws[0]);
 	vector<T> lp(L), rp(R); // left & right potential
 	vi lm(L, -1), rm(R, -1); // left & right match
  

@@ -1,7 +1,7 @@
 /**
  * Author: Yuhdao Yao
- * Date: 22-10-16
- * Description: Maximum matching of a general graph $G = (V, E)$.
+ * Date: 22-10-23
+ * Description: Maximum matching of a \textbf{general} graph $G = (V, E)$. Edges $E$ should be described as pairs such that pair $(u, v)$ means that there is an edge between vertex $u$ and vertex $v$.
  * Time: O(|V||E|).
  * Status: tested on https://www.luogu.com.cn/problem/P6113， https://uoj.ac/problem/79, https://codeforces.com/gym/103260/problem/E, https://ac.nowcoder.com/acm/contest/5666/I.
  **/

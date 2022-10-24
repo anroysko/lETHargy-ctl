@@ -1,9 +1,8 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-16
- * Description: Dinic algorithm for flow graph $G = (V, E)$.
- * Usage: Always run $MaxFlow(src, sink)$ for some $src$ and $sink$ first. Then you can run $getMinCut$ to obtain a Minimum Cut (vertices in the same part as $src$ are returned).
- * Time: O(|V|^2 |E|) for arbitrary networks. O(|E| \sqrt{|V|}) for bipartite/unit network. O(min{|V|^(2/3), |E|^(1/2)} |E|) for networks with only unit capacities.
+ * Date: 22-10-23
+ * Description: Dinic algorithm for flow graph $G = (V, E)$. You can get a minimum $src-sink$ cut easily. To get such minimum cut, first run $MaxFlow(src, sink)$. Then you can run $getMinCut()$ to obtain a Minimum Cut (vertices in the same part as $src$ are returned).
+ * Time: O(|V|^2 |E|) for arbitrary networks. O(|E| \sqrt{|V|}) for bipartite/unit network. O(min{|V|^{2/3}, |E|^{1/2}} |E|) for networks with only unit capacities.
  * Status: tested on https://codeforces.com/gym/103861/problem/H. Seems to be fast enough now.
  *  getDirFlow() and getUndirFlow() are not tested yet.
  */

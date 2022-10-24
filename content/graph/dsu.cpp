@@ -1,7 +1,7 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-08
- * Description: Disjoint set union. $merge$ merges components which $x$ and $y$ are in respectively and returns $1$ if $x$ and $y$ are in different components.
+ * Date: 22-10-24
+ * Description: Disjoint set union. $merge(x, y)$ merges components which $x$ and $y$ are in respectively and returns $1$ if $x$ and $y$ are in different components.
  * Time: amortized O(\alpha(M, N)) where $M$ is the number of operations. Almost constant in competitive programming.
  */
 
@@ -10,9 +10,10 @@ struct DSU {
 
 	DSU(int n): fa(n), siz(n, 1) { iota(all(fa), 0); }
 
-	int getcomp(int x) { return fa[x] == x ? x : fa[x] = getcomp(fa[x]); }
+	int getcomp(int x) { 
+		return fa[x] == x ? x : fa[x] = getcomp(fa[x]);
+	}
 
-	// return 1 if x and y are in different component and merge.
 	bool merge(int x, int y) {
 		int fx = getcomp(x), fy = getcomp(y);
 		if (fx == fy) return 0;

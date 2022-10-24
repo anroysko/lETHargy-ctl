@@ -1,12 +1,11 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-16
- * Description: Successive Shortest Path for flow graph $G = (V, E)$.
- * Usage: Always run $mincostflow(src, sink)$ for some $src$ and $sink$ to get the minimum cost and the maximum flow.
- * Time: O(|F| |E|\log{|E|}) for non-negative costs. O(|V| |E| + |F| |E|\log{|E|}) for arbitrary costs.
+ * Date: 22-10-23
+ * Description: Successive Shortest Path for flow graph $G = (V, E)$. 
+ *  Run $mincostflow(src, sink)$ for some $src$ and $sink$ to get the minimum cost and the maximum flow. For negative costs, Bellman-Ford is necessary.
+ * Time: O(|F| |E|\log{|E|}) for non-negative costs, where $|F|$ is the size of maximum flow. O(|V| |E| + |F| |E|\log{|E|}) for arbitrary costs.
  * Status: tested on https://qoj.ac/contest/503/problem/1269, https://codingcompetitions.withgoogle.com/codejam/round/0000000000436142/0000000000813e1a, https://codeforces.com/gym/103371/problem/L, https://codeforces.com/gym/102759/problem/F.
  */
-
 template<class Cap, class Cost, Cap Cap_MAX = numeric_limits<Cap>::max(), Cost Cost_MAX = numeric_limits<Cost>::max() / 4>
 struct SuccessiveShortestPath {
 	int n;
@@ -17,7 +16,7 @@ struct SuccessiveShortestPath {
 
 	SuccessiveShortestPath(int n): n(n), g(n), h(n) {}
 
-	void add(int u, int v, Cap c, Cost w) {
+	void addEdge(int u, int v, Cap c, Cost w) {
 		g[u].push_back(sz(es)); es.push_back({v, c, w});
 		g[v].push_back(sz(es)); es.push_back({u, 0, -w});
 	}

@@ -1,12 +1,11 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-04
- * Description: Given an undirected graph $G = (V, E)$, compute all cut vertices and bridges.
+ * Date: 22-10-23
+ * Description: Given an undirected graph $G = (V, E)$, compute all cut vertices and bridges. Cut vertices and bridges are returned in vectors containing indices.
  * Time: O(|V| + |E|).
  * Status: (cut) tested on: https://www.luogu.com.cn/problem/P3388;
  *  (bridge) tested on: https://www.luogu.com.cn/problem/P1656.
  */
-
 auto CutAndBridge(int n, const vector<pii> es) {
 	vvi g(n);
 	rep(i, 0, sz(es) - 1) {
