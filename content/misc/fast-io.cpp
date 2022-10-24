@@ -1,8 +1,8 @@
 /**
  * Author: Yuhao Yao
  * Date: 22-10-25
- * Description: Fast Read.
- * Status: tested on .
+ * Description: Fast Read for int / long long.
+ * Status: tested on https://ac.nowcoder.com/acm/contest/33187/J.
  */
 namespace fastIO  {
 	const int BUF_SIZE = 1 << 15;
