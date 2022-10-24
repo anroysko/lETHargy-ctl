@@ -1,12 +1,16 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-16
- * Description: Aho Corasick Automaton of strings $s_0, ..., s_{n - 1}$.
- * Usage: AhoCorasick<'a', 26> ac; for strings consisting of lowercase letters. Call $ac.build()$ after you insert all strings $s_0, ..., s_{n - 1}$.
+ * Date: 22-10-24
+ * Description: Aho Corasick Automaton of strings $s_0, ..., s_{n - 1}$. Call $build()$ after you insert all strings $s_0, ..., s_{n - 1}$.
+ * Usage: AhoCorasick<'a', 26> ac; // for strings consisting of lowercase letters. 
+ *  ac.insert("abc"); // insert string "abc".
+ *  ac.insert("acc"); // insert string "acc".
+ *  ac.build();
  * Time: O(\sum_{i = 0}^{n - 1} |s_i|).
  * Status: tested on http://ejudge.opencup.org/~ejudge/team.cgi?contest_id=2744 (problem M), https://www.luogu.com.cn/problem/P6125.
  */
-template<char st, int C> struct AhoCorasick {
+template<char st, int C>
+struct AhoCorasick {
 	struct node {
 		int nxt[C];
 		int fail;

@@ -1,9 +1,9 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-01
+ * Date: 22-10-24
  * Description: Given string $s = s_0...s_{n - 1}$, build the palindrom tree (automaton) for $s$. Each state of the automaton corresponds to a palindrome substring of $s$.
- *  Note that $t[i].fa < i$ holds.
- * Usage: Palindrome pt(s) for string $s$ or vector<int> $s$.
+ *  $t[i].fail$ is the state which is a border of state $i$. Note that $t[i].fail < i$ holds.
+ * Usage: Palindrome pt(s); // $s$ can be string or vector.
  * Time: O(|s|).
  * Status: tested on https://www.luogu.com.cn/problem/P3649, https://www.luogu.com.cn/problem/P4762, https://www.luogu.com.cn/problem/P5685, https://www.luogu.com.cn/problem/P5555, https://codeforces.com/gym/100548/problem/G, https://ac.nowcoder.com/acm/contest/884/I, https://ac.nowcoder.com/acm/contest/886/C.
  */

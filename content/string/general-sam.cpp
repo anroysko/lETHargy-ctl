@@ -1,19 +1,19 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-14
- * Description: General Suffix Automaton of a given Trie $T$. (Using map to store sons makes it 2~3 times slower but it should be fine in most cases. If $T$ is of size > $10^6$, then you should think of using int[] instead of map.)
+ * Date: 22-10-24
+ * Description: General Suffix Automaton of a given Trie $T$. (Using map to store sons makes it 2$\sim$3 times slower but it should be fine in most cases. If $T$ is of size > $10^6$, then you should think of using int[] instead of map.)
  *  $len$ is the length of the longest substring corresponding to the state. 
- *  $fa$ is the father in the prefix tree. Note that fa[i] < i doesn't hold.
+ *  $fa$ is the father in the reversed prefix tree. Note that fa[i] < i doesn't hold.
  *  $occ$ should be set manually when building Trie $T$.
  *  root is 0.
- * Usage: Use GSAM sam(T) for Trie $T$, where $T$ is of type $vector<GSAM::node>$.
+ * Usage: GSAM sam(T); // $T$ should be vector<GSAM::node>.
  * Time: O(|T|).
  * Status: tested on https://www.luogu.com.cn/problem/P6139, https://nanti.jisuanke.com/t/42551, https://codeforces.com/contest/316/problem/G3.
- **/
+ */
 
 struct GSAM {
 	struct node {
-		map<int, int> nxt;
+		map<int, int> nxt; // change this if it is slow.
 		int fa, len;
 		int occ;
 		node() { fa = -1; len = occ = 0; }

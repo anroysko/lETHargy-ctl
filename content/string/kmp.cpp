@@ -1,14 +1,15 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-26
+ * Date: 22-10-24
  * Description: Compute fail table of pattern string $s = s_0...s_{n - 1}$ in linear time and get all matched positions in text string $t$ in linear time.
- *  $fail[i]$ denotes the length of the border of substring $p_0...p_i$.
- * Usage: KMP kmp(s) for string $s$ or vector<int> $s$.
- * Time: O(|p|) for precalculation and O(|p| + |t|) for matching.
+ *  $fail[i]$ denotes the length of the border of substring $s_0...s_i$.
+ *  In $match(t)$, $res[i] = 1$ means that $t_i...t_{i + n - 1}$ matched to $s$.
+ * Usage: KMP kmp(s); // $s$ can be string or vector.
+ * Time: O(|s|) for precalculation and O(|t|) for matching.
  * Status: tested on https://www.luogu.com.cn/problem/P6216, https://www.luogu.com.cn/problem/P5446, https://www.codechef.com/submit/SSTRPREF2.
  */
 template<class T> struct KMP {
-	const T s;
+	const T s; /// start-hash
 	int n;
 	vi fail;
 
@@ -19,10 +20,9 @@ template<class T> struct KMP {
 			if (s[j] == s[i]) j++;
 			fail[i] = j;
 		}
-	}
+	} ///end-hash
 
-	// gets all matched (starting) positions.
-	vi match(const T &t) {
+	vi match(const T &t) { /// start-hash
 		int m = sz(t), j = 0;
 		vi res(m);
 		rep(i, 0, m - 1) {
@@ -31,5 +31,5 @@ template<class T> struct KMP {
 			if (j == n) res[i - n + 1] = 1;
 		}
 		return res;
-	}
+	} /// end-hash
 };

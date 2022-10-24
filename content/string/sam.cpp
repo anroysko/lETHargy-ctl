@@ -1,19 +1,19 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-13
- * Description: Suffix Automaton of a given string $s$. (Using map to store sons makes it 2~3 times slower but it should be fine in most cases.)
+ * Date: 22-10-24
+ * Description: Suffix Automaton of a given string $s$. (Using map to store sons makes it 2$\sim$3 times slower but it should be fine in most cases.)
  *  $len$ is the length of the longest substring corresponding to the state. 
  *  $fa$ is the father in the prefix tree. Note that fa[i] < i doesn't hold.
  *  $occ$ is $0/1$, indicating if the state contains a prefix of the string $s$. One can do a dfs/bfs to compute for each substring, how many times it occurs in the whole string $s$. (See function $calOccurrence$ for bfs implementation.)
  *  root is set as 0.
- * Usage: Use SAM sam(s) for string $s$ or vector<int> $s$.
+ * Usage: SAM sam(s); // $s$ can be string or vector<int>.
  * Time: O(|s|).
  * Status: tested on https://ac.nowcoder.com/acm/contest/884/I, https://ac.nowcoder.com/acm/contest/33188/H, https://codeforces.com/gym/101194/problem/F, https://nanti.jisuanke.com/t/A2018, https://darkbzoj.cc/problem/3238, https://nanti.jisuanke.com/t/A1623, https://www.spoj.com/problems/NSUBSTR/en/, https://codeforces.com/contest/235/problem/C.
  */
 
 template<class T> struct SAM {
 	struct node { /// start-hash
-		map<int, int> nxt;
+		map<int, int> nxt; // change this if it is slow.
 		int fa, len;
 		int occ, pos; // # of occurrence (as prefix) & endpos.
 		node(int fa = -1, int len = 0): fa(fa), len(len) {

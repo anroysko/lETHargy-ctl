@@ -1,10 +1,11 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-25
+ * Date: 22-10-24
  * Description: Suffix Array for non-cyclic string $s = s_0...s_{n - 1}$. 
  *  $rank[i]$ records the rank of the $i$-th suffix $s_i...s_{n - 1}$.
  *  $sa[i]$ records the starting position of the $i$-th smallest suffix.
  *  $h[i]$ (also called height array or lcp array) records the lcp of the $sa[i]$-th suffix and the $sa[i + 1]$-th suffix in $s$.
+ * Usage: SA suf(s); // $s$ can be string or vector.
  * Time: O(|s| \log |s|).
  * Status: tested on https://www.luogu.com.cn/record/87444853, https://www.luogu.com.cn/problem/P4094, https://ac.nowcoder.com/acm/contest/33186/B, https://codeforces.com/gym/102994/problem/D, https://ac.nowcoder.com/acm/contest/33195/D, https://www.luogu.com.cn/problem/P8023, https://www.luogu.com.cn/problem/P7769.
  */
