@@ -1,18 +1,19 @@
 /**
  * Author: Yuhao Yao
  * Source: Adapted from tourist code.
- * Date: 22-08-05
- * Description: Solves a general linear maximization problem: maximize $c^T x$ subject to $Ax \le b$, $x \ge 0$. Returns \{$res$, $x$\}:
- * $res = 0$ if the program is infeasible; $res = 1$ if there exists an optimal solution; $res = 2$ if the program is unbounded. 
- * $x$ is valid only when $res = 1$.
+ * Date: 22-10-25
+ * Description: Solves a general linear maximization problem: maximize $c^\top x$ subject to $Ax \le b$, $x \ge 0$. Returns \{$res$, $x$\}:
+ *  $res = 0$ if the program is infeasible; $res = 1$ if there exists an optimal solution; $res = 2$ if the program is unbounded. 
+ *  $x$ is valid only when $res = 1$.
+ *  $T$ can be \textbf{double} or \textbf{long double}.
  * Time: O(NM * \#pivots), where $N$ is the number of constraints and $M$ is the number of variables.
  * Status: tested on https://acm.hdu.edu.cn/showproblem.php?pid=6248.
  */
-
 template<class T>
 pair<int, vector<T>> Simplex(const vector<vector<T>> &A, const vector<T> &b, const vector<T> &c) {
 	const T eps = 1e-8;
 
+	assert(sz(A) > 0 && sz(A[0]) > 0);
 	int n = sz(A);
 	int m = sz(A[0]);
 	vector<vector<T>> a(n + 1, vector<T>(m + 1));

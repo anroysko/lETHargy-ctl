@@ -1,12 +1,15 @@
 /**
  * Author: Yuhao Yao
- * Description: Fast Fourier Transform.
- * Time: O(N \log N)
+ * Date: 22-10-24
+ * Description: Fast Fourier Transform. $T$ can be \textbf{double} or \textbf{long double}
+ * Usage: FFT<double> fft;
+ *  auto cs = ff.conv(vector<double>{1, 2, 3}, vector<double>{3, 4, 5});
+ *  vector<int> ds = ff.conv(vector<int>{1, 2, 3}, vector<int>{3, 4, 5}, 1000000007); // convolution of integers wrt arbitrary $mod \le 2^31 - 1$. 
+ * Time: O(N \log N).
+ * Status: tested on https://official.contest.yandex.com/mw2020prefinals/contest/18053/problems/H/.
  */
-#pragma once
-
-// use T = double or long double.
-template<class T> struct FFT {
+template<class T>
+struct FFT {
 	using cp = complex<T>;
 	static constexpr T pi = acos(T{-1});
 	vi r;

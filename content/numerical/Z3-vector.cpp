@@ -1,13 +1,13 @@
 /**
  * Author: Yuhao Yao.
- * Date: 22-10-18
+ * Date: 22-10-25
  * Description: vector in $\mathbb{Z}_3$.
- * Time: O(L / w).
+ * Time: O(d / w) for +, -, * and /.
  * Status: tested on https://codeforces.com/gym/102394/problem/G.
  */
-
-template<int L> struct v3 {
-	bitset<L> a[3]; /// start-hash
+template<int d>
+struct v3 {
+	bitset<d> a[3]; /// start-hash
 
 	v3() { a[0].set(); }
 
@@ -46,7 +46,7 @@ template<int L> struct v3 {
 
 	friend string to_string(const v3 &a) {
 		string s;
-		rep(i, 0, L - 1) s.push_back('0' + a[i]);
+		rep(i, 0, d - 1) s.push_back('0' + a[i]);
 		return s;
 	}
 };

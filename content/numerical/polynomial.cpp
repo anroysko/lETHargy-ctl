@@ -1,12 +1,12 @@
 /**
  * Author: Yuhao Yao
- * Description: Basic polynomial struct. Usually we use modnum as template parameter.
+ * Date: 22-10-24
+ * Description: Basic polynomial struct. Usually we use $modnum$ as template parameter. $inv(k)$ gives the inverse of the polynomial $mod~ x^k$ (by default $k$ is the highest power plus one).
+ * Status: inv() tested on https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence.
  */
-#pragma once
-
-template<class T> struct poly: vector<T> {
-	/// start-hash
-	using vector<T>::vector;
+template<class T>
+struct poly: vector<T> {
+	using vector<T>::vector; /// start-hash
 	poly(const vector<T> &vec): vector<T>(vec) {}
 	
 	friend poly& operator *=(poly &a, const poly &b) { 

@@ -1,16 +1,24 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-16
- * Description: Matrix struct. Used for Gaussian elimination or inverse of matrix.
- * Usage: To solve $A x =  b^\top$, call $SolveLinear(A, b)$.
+ * Date: 22-10-24
+ * Description: Matrix struct. 
+ *  $Gaussian(C)$ eliminates the first $C$ columns and returns the rank of matrix induced by first $C$ columns.
+ *  $inverse()$ gives the inverse of the matrix.
+ *  $SolveLinear(A, b)$ solves linear system $A x =  b$ for matrix $A$ and vector $b$.
  *  Besides, you need function $isZero$ for your template $T$.
+ * Usage: For SolveLinear():
+ *  bool isZero(double x) { return abs(x) <= 1e-9; } // global
+ *  Matrix<double> A(3, 4);
+ *  vector<double> b(3);
+ *  ... // set values for A and b.
+ *  vector<double> xs = SolveLinear(A, b);
  * Time: O(n m \min\{n, m\}) for Gaussian, inverse and SolveLinear.
- * Status: inverse is tested on https://ac.nowcoder.com/acm/contest/33187/J; 
- *  SolveLinear tested on https://www.luogu.com.cn/problem/P6125.
+ * Status: inverse() tested on https://ac.nowcoder.com/acm/contest/33187/J; 
+ *  SolveLinear() tested on https://www.luogu.com.cn/problem/P6125.
  */
-
-template<class T> struct Matrix {
-	using Mat = Matrix;
+template<class T>
+struct Matrix {
+	using Mat = Matrix; /// start-hash
 	using Vec = vector<T>;
 
 	vector<Vec> a;
@@ -24,15 +32,16 @@ template<class T> struct Matrix {
 	}
 
 	Vec& operator [](int i) const { return (Vec&) a[i]; }
+	/// end-hash
 
-	Mat operator + (const Mat &b) const {
+	Mat operator +(const Mat &b) const {
 		int n = sz(a), m = sz(a[0]);
 		Mat c(n, m);
 		rep(i, 0, n - 1) rep(j, 0, m - 1) c[i][j] = a[i][j] + b[i][j];
 		return c;
 	}
 
-	Mat operator - (const Mat &b) const {
+	Mat operator -(const Mat &b) const {
 		int n = sz(a), m = sz(a[0]);
 		Mat c(n, m);
 		rep(i, 0, n - 1) rep(j, 0, m - 1) c[i][j] = a[i][j] - b[i][j];
@@ -54,8 +63,8 @@ template<class T> struct Matrix {
 		return res;
 	}
 
-	// Do elimination for the first C columns, return the rank.
-	int Gaussian(int C) {
+	// Eliminate the first C columns, return the rank of matrix induced by first C columns.
+	int Gaussian(int C) { /// start-hash
 		int n = sz(a), m = sz(a[0]), rk = 0;
 		assert(C <= m);
 		rep(c, 0, C - 1) {
@@ -73,9 +82,9 @@ template<class T> struct Matrix {
 			rk++;
 		}
 		return rk;
-	}
+	} /// end-hash
 
-	Mat inverse() const {
+	Mat inverse() const { /// start-hash
 		int n = sz(a), m = sz(a[0]);
 		assert(n == m);
 		auto b = *this;
@@ -84,26 +93,24 @@ template<class T> struct Matrix {
 		assert(b.Gaussian(n) == n);
 		for (auto &row: b.a) row.erase(row.begin(), row.begin() + n);
 		return b;
-	}
+	} /// end-hash
 
-	friend pair<bool, Vec> SolveLinear(Mat A, const Vec &b) {
-		#define revrep(i, a, n) for (auto i = n; i >= (a); --i)
-
+	friend pair<bool, Vec> SolveLinear(Mat A, const Vec &b) { /// start-hash
 		int n = sz(A.a), m = sz(A[0]);
 		assert(sz(b) == n);
 		rep(i, 0, n - 1) A[i].push_back(b[i]);
 		int rk = A.Gaussian(m);
-		rep(i, rk, n - 1) if (!::isZero(A[i].back())) return {0, Vec{}};
+		rep(i, rk, n - 1) if (::isZero(A[i].back()) == 0) return {0, Vec{}};
 		Vec res(m);
 		revrep(i, 0, rk - 1) {
 			T x = A[i][m];
 			int last = -1;
-			revrep(j, 0, m - 1) if (!::isZero(A[i][j])) {
+			revrep(j, 0, m - 1) if (::isZero(A[i][j]) == 0) {
 				x -= A[i][j] * res[j];
 				last = j;
 			}
 			if (last != -1) res[last] = x;
 		}
 		return {1, res};
-	}
+	} /// end-hash
 };
