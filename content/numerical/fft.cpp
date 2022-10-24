@@ -1,12 +1,12 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-24
- * Description: Fast Fourier Transform. $T$ can be \textbf{double} or \textbf{long double}
+ * Date: 22-10-25
+ * Description: Fast Fourier Transform. $T$ can be \textbf{double} or \textbf{long double}.
  * Usage: FFT<double> fft;
- *  auto cs = ff.conv(vector<double>{1, 2, 3}, vector<double>{3, 4, 5});
- *  vector<int> ds = ff.conv(vector<int>{1, 2, 3}, vector<int>{3, 4, 5}, 1000000007); // convolution of integers wrt arbitrary $mod \le 2^31 - 1$. 
+ *  auto cs = fft.conv(vector<double>{1, 2, 3}, vector<double>{3, 4, 5});
+ *  vector<int> ds = fft.conv(vector<int>{1, 2, 3}, vector<int>{3, 4, 5}, 1000000007); // convolution of integers wrt arbitrary $mod \le 2^{31} - 1$. 
  * Time: O(N \log N).
- * Status: tested on https://official.contest.yandex.com/mw2020prefinals/contest/18053/problems/H/.
+ * Status: tested on https://official.contest.yandex.com/mw2020prefinals/contest/18053/problems/H/, https://judge.yosupo.jp/problem/convolution_mod_1000000007.
  */
 template<class T>
 struct FFT {
