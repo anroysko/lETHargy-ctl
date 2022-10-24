@@ -1,18 +1,24 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-11
- * Description: Persistent Segment Tree. Point apply and thus no lazy propogation.
- * Usage: Always define a global apply function to tell segment tree how you apply modification. 
- *  Combine is set as plus so if you just let $T$ be numerical type then you have range sum in the info and as range query result. To have something different, say rangeMin, define a struct with constructer and + operation.
+ * Date: 22-10-23
+ * Description: Persistent Segment Tree of range $[0, N - 1]$. Point apply and thus no lazy propogation.
+ *  Always define a global $apply$ function to tell segment tree how you apply modification. 
+ *  Combine is set as + operation. If you use your own struct, then please define constructor and + operation.
+ *  In constructor, $q$ is the number of $pointApply$ you will use.
+ * Usage: Point Add and Range Sum.
+ *  void apply(int \&a, int b) { a += b; } // global
+ *  ...
+ *  PersistSegtree<int> pseg(10, 1); // len = 10 and 1 update.
+ *  int rt = 0; // empty node.
+ *  int new_rt = pseg.pointApply(rt, 9, 1); // add 1 to last position (position 9).
+ *  int sum = pseg.rangeAsk(new_rt, 7, 9); // ask the sum between position 7 and 9, wrt version new_rt.
  * Time: O(\log N) per operation.
  * Status: tested on https://codeforces.com/contest/1479/problem/D, https://www.luogu.com.cn/problem/P7361, https://www.luogu.com.cn/problem/P4094.
  */
-template<class Info> class PersistSegtree {
-	/// start-hash
-	struct node { Info info; int ls, rs; };
+template<class Info> struct PersistSegtree {
+	struct node { Info info; int ls, rs; }; /// start-hash
 	int n;
 	vector<node> t;
-public:
 	// node 0 is left as virtual empty node.
 	PersistSegtree(int n, int q): n(n), t(1) {
 		assert(n > 0);
@@ -25,12 +31,15 @@ public:
 		auto dfs = [&](auto &dfs, int &i, int l, int r) {
 			t.push_back(t[i]);
 			i = sz(t) - 1;
-			::apply(t[i].info, val...);
 
-			if (l == r) return;
+			if (l == r) {
+				::apply(t[i].info, val...);
+				return;
+			}
 			int mid = (l + r) >> 1;
 			if (pos <= mid) dfs(dfs, t[i].ls, l, mid);
 			else dfs(dfs, t[i].rs, mid + 1, r);
+			t[i].info = t[t[i].ls].info + t[t[i].rs].info;
 		};
 		dfs(dfs, rt, 0, n - 1);
 		return rt;
