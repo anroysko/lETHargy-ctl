@@ -1,7 +1,7 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-11
- * Description: Sieve for prime numbers / multiplicative functions in linear time.
+ * Date: 22-10-25
+ * Description: Sieve for prime numbers / multiplicative functions in $\{1, 2, ..., N\}$ in linear time.
  * Time: O(N).
  * Status: tested on https://official.contest.yandex.com/opencupXXII/contest/37831/problems/B/.
  */

@@ -1,12 +1,13 @@
 /**
  * Author: Yuhao Yao
- * Description: Fast Factorization. The mul function supports $0 \le a,b < c < 7.268 \times 10^{18}$ and is a little bit faster than \_\_int128.
- * Time: O(n ^ {1 / 4}) for pollard-rho and same for the whole factorization.
+ * Date: 22-10-25
+ * Description: Primality test and Fast Factorization. The $mul$ function supports $0 \le a, b < c < 7.268 \times 10^{18}$ and is a little bit faster than \_\_int128.
+ * Time: O(x ^ {1 / 4}) for pollard-rho and same for factorizing $x$.
+ * Status: tested on https://judge.yosupo.jp/problem/factorize.
  */
-
 namespace Factorization {
 	inline ll mul(ll a, ll b, ll c) { /// start-hash
-		ll s = a * b - c * ll((long double)a / c * b + 0.5);
+		ll s = a * b - c * ll((long double) a / c * b + 0.5);
 		return s < 0 ? s + c : s;
 	}
 
@@ -23,8 +24,10 @@ namespace Factorization {
 
 			ll d = (n - 1) >> __builtin_ctzll(n - 1);
 			ll r = mPow(a, d, n);
-
-			while (d < n - 1 && r != 1 && r != n - 1) d <<= 1, r = mul(r, r, n);
+			while (d < n - 1 && r != 1 && r != n - 1) {
+				d <<= 1;
+				r = mul(r, r, n);
+			}
 			return r == n - 1 || d & 1;
 		};
 
@@ -33,12 +36,11 @@ namespace Factorization {
 		return 1;
 	} /// end-hash
 
-	/// start-hash
-	mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
+	mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count()); /// start-hash
 	ll myrand(ll a, ll b) { return uniform_int_distribution<ll>(a, b)(rng); }
 
 	ll pollard(ll n) { // return some nontrivial factor of n.
-		auto f = [&](ll x) { return ((__int128)x * x + 1) % n; };
+		auto f = [&](ll x) { return ((__int128) x * x + 1) % n; };
 
 		ll x = 0, y = 0, t = 30, prd = 2;
 		while (t++ % 40 || gcd(prd, n) == 1) {
@@ -51,19 +53,19 @@ namespace Factorization {
 		return gcd(prd, n);
 	}
 
-	vector<ll> work(ll n) {
+	vector<ll> factorize(ll n) {
 		vector<ll> res;
 
-		function<void(ll)> solve = [&](ll x) {
+		auto dfs = [&](auto &dfs, ll x) {
 			if (x == 1) return;
 			if (miller(x)) res.push_back(x);
 			else {
 				ll d = pollard(x);
-				solve(d);
-				solve(x / d);
+				dfs(dfs, d);
+				dfs(dfs, x / d);
 			}
 		};
-		solve(n);
+		dfs(dfs, n);
 		return res;
 	} /// end-hash
 }

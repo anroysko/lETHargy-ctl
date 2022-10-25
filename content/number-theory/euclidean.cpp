@@ -1,11 +1,10 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-18
+ * Date: 22-10-25
  * Description: Compute $\sum_{i = 1}^n \lfloor \frac{a i + b}{c} \rfloor$ for integer numbers $a, b, c, n$.
  * Time: O(\log c).
  * Status: tested on https://ac.nowcoder.com/acm/contest/148/H, https://qoj.ac/problem/3004.
-**/
-
+ */
 template<class T>
 T Euclidean(ll a, ll b, ll c, ll n) {
 	T res = 0;
