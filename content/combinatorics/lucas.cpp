@@ -4,8 +4,9 @@
  * Description: Lucas's theorem: Let $n, m$ be non-negative integers and $p$ a prime.
  *  Write $n = n_k p^k + ... + n_1 p + n_0$ and $m = m_k p^k + ... + m_1 p +m_0$.
  *  Then $\binom{n}{m} \equiv \prod_{i=0}^k\binom{n_i}{m_i} \pmod{p}$.
+ *  It is used when $p$ is not large but $n, m$ are large.
  *  Usually we use $modnum$ as template parameter.
- * Time: O(\log_p n).
+ * Time: O(p) for preprosessing and O(\log_p n) for one query.
  * Status: tested on https://www.luogu.com.cn/problem/P3807.
  */
 template<class Mint>
