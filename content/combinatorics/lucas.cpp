@@ -1,7 +1,7 @@
 /**
  * Author: Yuhao Yao
  * Date: 22-10-25
- * Description: Lucas's theorem: Let $n, m$ be non-negative integers and $p$ a prime.
+ * Description: Lucas's theorem: Let $n, m$ be non-negative integers and $p$ be a prime.
  *  Write $n = n_k p^k + ... + n_1 p + n_0$ and $m = m_k p^k + ... + m_1 p +m_0$.
  *  Then $\binom{n}{m} \equiv \prod_{i=0}^k\binom{n_i}{m_i} \pmod{p}$.
  *  It is used when $p$ is not large but $n, m$ are large.
