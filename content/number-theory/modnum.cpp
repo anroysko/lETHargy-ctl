@@ -38,9 +38,13 @@ struct Z {
 		return *this *= b.pow(mod - 2);
 	}
 	friend Z operator /(Z a, Z b) { return a /= b; }
+	friend bool operator ==(Z a, Z b) { return a.x == b.x; }
+	friend bool operator <(Z a, Z b) { return a.x < b.x; }
 
 	static int getMod() { return mod; } // ntt need this.
 	/// end-hash
 
 	friend string to_string(Z a) { return to_string(a.x); }
 };
+int mod;
+using Mint = Z<mod>;
