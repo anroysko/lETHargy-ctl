@@ -1,7 +1,7 @@
 /**
  * Author: Yuhao Yao
  * Date: 22-10-25
- * Description: BSGS for discrete log. Formally, it solves $a ^ x \equiv b (\mod~ p)$ given integer $a, b, p$. Returns an solution $x$ if there exists.
+ * Description: BSGS for discrete log. Formally, it solves $a ^ x \equiv b (\mod\, p)$ given integer $a, b$ and a prime number $p$. Returns an solution $x$ if there exists.
  * Time: O(\sqrt{p} \log p).
  * Status: tested on https://www.luogu.com.cn/problem/P3846.
  */

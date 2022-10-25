@@ -1,10 +1,10 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-25
+ * Date: 22-10-26
  * Description: Tonelli-Shanks algorithm for modular square roots. Formally, it solves $x^2 \equiv a (mod~ p)$ for prime $p$ and return arbitrary solution if there exists.
  *  Usually we use $modnum$ as template parameter.
  * Time: O(\log^2 p) worst case, often O(\log p).
- * Status: tested on https://www.luogu.com.cn/problem/P5491.
+ * Status: tested on https://www.luogu.com.cn/problem/P5491, https://judge.yosupo.jp/problem/sqrt_mod.
  */
 template<class Mint>
 pair<bool, Mint> ModSqrt(Mint a) {
