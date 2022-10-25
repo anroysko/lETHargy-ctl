@@ -1,9 +1,9 @@
 /**
  * Author: Yuhao Yao
  * Date: 22-10-21
- * Desciption: Finding a Maximum Clique of a graph $G = (V, E)$. Should be fine with $|V| \le 60$. (The algorithm actually enumberates all maximal clique, without double counting.)
+ * Description: Finding a Maximum Clique of a graph $G = (V, E)$. Should be fine with $|V| \le 60$. (The algorithm actually enumberates all maximal clique, without double counting.)
  * Status: tested on https://judge.yosupo.jp/problem/maximum_independent_set, https://codeforces.com/contest/1578/problem/K.
-**/
+ */
 
 template<int L>
 vi BronKerbosch(int n, const vector<pii> &es) {
