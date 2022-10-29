@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-26
+ * Date: 22-10-29
  * Description: Class to handle points in 2D-plane. Avoid using $T = int$. 
  * Status:
  *  project_to_line (double) tested on https://acm.hdu.edu.cn/showproblem.php?pid=6419.
@@ -18,12 +18,12 @@ struct Point {
 
 	T x, y;
 
-	P operator +(P a) const { return P{x + a.x, y + a.y}; }
-	P operator -(P a) const { return P{x - a.x, y - a.y}; }
-	P operator *(T a) const { return P{x * a, y * a}; }
-	P operator /(T a) const { return P{x / a, y / a}; }
-	bool operator ==(P a) const { return cmp(x, a.x) == 0 && cmp(y, a.y) == 0; }
-	bool operator <(P a) const { return cmp(x, a.x) == 0 ? cmp(y, a.y) < 0: x < a.x; }
+	P operator +(P b) const { return P{x + b.x, y + b.y}; }
+	P operator -(P b) const { return P{x - b.x, y - b.y}; }
+	P operator *(T b) const { return P{x * b, y * b}; }
+	P operator /(T b) const { return P{x / b, y / b}; }
+	bool operator ==(P b) const { return cmp(x, b.x) == 0 && cmp(y, b.y) == 0; }
+	bool operator <(P b) const { return cmp(x, b.x) == 0 ? cmp(y, b.y) < 0: x < b.x; }
 
 	T len2() const { return x * x + y * y; }
 	T len() const { return sqrt(x * x + y * y); }
@@ -63,10 +63,10 @@ struct Point {
 		else return (*this - a).dot(b - a) / (b - a).len();
 	} /// end-hash
 
-	// Returns the signed distance to line $ab$. Returns 0 if $a = b$.
+	// Returns the signed distance to line $ab$. $a$ and $b$ should be distinct.
 	T dis_to_line(P a, P b) const { /// start-hash
+		assert((a - b).len2() > P::eps);
 		if (isInt) return (*this - a).cross(b - a);
-		else if (a == b) return 0;
 		else return (*this - a).cross(b - a) / (b - a).len();
 	} /// end-hash
 	
@@ -89,7 +89,7 @@ struct Point {
 		return dis_to_seg(a, b) <= eps; 
 	}  /// end-hash
 
-	// Check if it is on line ab. Need a != b, otherwise returns true.
+	// Check if it is on line $ab$. Need $a != b$.
 	bool on_line(P a, P b) const {  /// start-hash
 		return sgn(dis_to_line(a, b)) == 0;
 	}  /// end-hash

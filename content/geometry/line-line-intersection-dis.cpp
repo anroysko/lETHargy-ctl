@@ -1,7 +1,7 @@
 /**
  * Author: Yuhao Yao
  * Date: 22-08-23
- * Description: Compute the distance from point $a$ to the intersection point of Line $ab$ and Line $cd$.
+ * Description: Compute the distance from Point $a$ to the intersection point of Line $ab$ and Line $cd$.
  */
 template<class P>
 auto discapLineLine(P a, P b, P c, P d) {
