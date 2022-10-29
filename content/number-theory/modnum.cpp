@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-25
+ * Date: 22-10-29
  * Description: Modular integer with $mod \le 2^{30} - 1$. Note that there are several advantages to use this code:
    1. You do not need to keep writing $\%\, mod$;
    2. It is good to use this struct when doing Gaussian Elimination / Fast Walsh-Hadamard Transform;
@@ -46,5 +46,3 @@ struct Z {
 
 	friend string to_string(Z a) { return to_string(a.x); }
 };
-int mod;
-using Mint = Z<mod>;
