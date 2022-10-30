@@ -15,7 +15,8 @@
  * Time: O(\log N) per operation.
  * Status: tested on https://codeforces.com/contest/1479/problem/D, https://www.luogu.com.cn/problem/P7361, https://www.luogu.com.cn/problem/P4094.
  */
-template<class Info> struct PersistSegtree {
+template<class Info>
+struct PersistSegtree {
 	struct node { Info info; int ls, rs; }; /// start-hash
 	int n;
 	vector<node> t;

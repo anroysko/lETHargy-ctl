@@ -15,7 +15,8 @@
  * Time: O(\log (oR - oL + 1) \times \log(iR - iL + 1)) per operation.
  * Status: tested on https://qoj.ac/contest/819/problem/2548.
  */
-template<class Info> struct SegTree2D {
+template<class Info>
+struct SegTree2D {
 	struct iNode { Info info; int ls, rs; };
 	struct oNode { int id; int ls, rs; };
 	
