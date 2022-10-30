@@ -11,7 +11,8 @@
  * Status: tested on https://ac.nowcoder.com/acm/contest/884/I, https://ac.nowcoder.com/acm/contest/33188/H, https://codeforces.com/gym/101194/problem/F, https://nanti.jisuanke.com/t/A2018, https://darkbzoj.cc/problem/3238, https://nanti.jisuanke.com/t/A1623, https://www.spoj.com/problems/NSUBSTR/en/, https://codeforces.com/contest/235/problem/C.
  */
 
-template<class T> struct SAM {
+template<class T> 
+struct SAM {
 	struct node { /// start-hash
 		map<int, int> nxt; // change this if it is slow.
 		int fa, len;

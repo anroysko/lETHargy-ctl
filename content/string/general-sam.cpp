@@ -13,14 +13,14 @@
 
 struct GSAM {
 	struct node {
-		map<int, int> nxt; // change this if it is slow.
-		int fa, len;
-		int occ;
+		map<int, int> nxt; // change this if TL or ML is tight.
+		int fa, len; // keep fa = -1 and len = 0 initially.
+		int occ; // should be assigned when building the trie.
 		node() { fa = -1; len = occ = 0; }
 	};
 
 	vector<node> t;
-	GSAM(const vector<node> &trie): t(trie) { // swap(t, trie) here if TL and ML is tight
+	GSAM(const vector<node> &trie): t(trie) { // swap(t, trie) here if TL or ML is tight
 		auto ins = [&](int now, int c) {
 			int last = t[now].nxt[c];
 			t[last].len = t[now].len + 1;
@@ -37,7 +37,7 @@ struct GSAM {
 					t.emplace_back();
 					int np = sz(t) - 1;
 					for (auto [i, v]: t[p].nxt) if (t[v].len > 0) {
-						t[np].nxt[i] = v; // use emplace here?
+						t[np].nxt[i] = v;
 					}
 					t[np].fa = t[p].fa;
 					t[np].len = t[now].len + 1;
