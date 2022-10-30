@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-24
+ * Date: 22-10-30
  * Description: Suffix Automaton of a given string $s$. (Using map to store sons makes it 2$\sim$3 times slower but it should be fine in most cases.)
  *  $len$ is the length of the longest substring corresponding to the state. 
  *  $fa$ is the father in the prefix tree. Note that fa[i] < i doesn't hold.

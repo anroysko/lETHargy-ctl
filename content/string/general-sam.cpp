@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-24
+ * Date: 22-10-30
  * Description: General Suffix Automaton of a given Trie $T$. (Using map to store sons makes it 2$\sim$3 times slower but it should be fine in most cases. If $T$ is of size > $10^6$, then you should think of using int[] instead of map.)
  *  $len$ is the length of the longest substring corresponding to the state. 
  *  $fa$ is the father in the reversed prefix tree. Note that fa[i] < i doesn't hold.
