@@ -1,9 +1,9 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-25
+ * Date: 22-10-30
  * Description: Primality test and Fast Factorization. The $mul$ function supports $0 \le a, b < c < 7.268 \times 10^{18}$ and is a little bit faster than \_\_int128.
  * Time: O(x ^ {1 / 4}) for pollard-rho and same for factorizing $x$.
- * Status: tested on https://judge.yosupo.jp/problem/factorize.
+ * Status: tested on https://judge.yosupo.jp/problem/factorize, https://qoj.ac/contest/821/problem/2574.
  */
 namespace Factorization {
 	inline ll mul(ll a, ll b, ll c) { /// start-hash
