@@ -7,7 +7,8 @@
  *  If the intersection is empty, then the returned vector has a size at most 2.
  *  Otherwise a Convex hull is returned, which has no consectuive collinear points.
  *  Only works for \textbf{double} and \textbf{long double}.
- * Status: tested on https://official.contest.yandex.com/opencupXXII/contest/38278/problems/K/, https://www.luogu.com.cn/problem/P6505.
+ *  \textbf{Needed function(s): argcmp, dis\_to\_line}.
+ * Status: tested on https://official.contest.yandex.com/opencupXXII/contest/38278/problems/K/, https://www.luogu.com.cn/problem/P6505, https://qoj.ac/contest/782/problem/2162.
  */
 template<class P> /// start-hash
 struct HalfPlane {

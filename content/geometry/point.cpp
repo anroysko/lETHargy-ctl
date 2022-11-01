@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-29
+ * Date: 22-10-31
  * Description: Class to handle points in 2D-plane. Avoid using $T = int$. 
  * Status:
  *  project_to_line (double) tested on https://acm.hdu.edu.cn/showproblem.php?pid=6419.
@@ -9,7 +9,7 @@
  */
 template<class T> 
 struct Point {
-	using P = Point;
+	using P = Point; /// start-hash
 	using type = T;
 	static constexpr T eps = 1e-9;
 	static constexpr bool isInt = is_integral_v<T>;
@@ -35,26 +35,26 @@ struct Point {
 	// dot and cross may lead to big relative error for imprecise point when the result is relatively smaller than the input magnitude.
 	T dot(P b) const { return x * b.x + y * b.y; }
 	T cross(P b) const { return x * b.y - y * b.x; }
+	/// end-hash
 
-	bool is_upper() const { return y > eps || (sgn(y) == 0 && x < -eps); }
+	int is_upper() const { return y > eps || (sgn(y) == 0 && x < -eps); } /// start-hash
 	
 	// return -1 if a has smaller pollar; return 1 if a has a larger pollar; return 0 o.w.
+	// Taking unit makes it slower but it performs as atan2.
 	static int argcmp(P a, P b) {
 		if (a.is_upper() != b.is_upper()) return cmp(a.is_upper(), b.is_upper());
 		return sgn(b.cross(a));
-		// Taking unit makes it slower but I believe it is also safer. You can drop .unit() when you think the precision is not an issue.
-		// atan2 is much slower.
-	}
+	} /// end-hash
 
 	P rot90() const { return P{-y, x}; }
 	P rot270() const { return P{y, -x}; }
 	
 	// Possible precision error: 
 	// Absolute error is multiplied by the magnitude while the resulting coordinates can have 0 as magnitude!
-	P rotate(T theta) const {
+	P rotate(T theta) const { /// start-hash
 		P a{cos(theta), sin(theta)};
 		return P{x * a.x - y * a.y, x * a.y + y * a.x};
-	}
+	} /// end-hash
 
 	// Returns the signed projected length onto line $ab$. Return 0 if $a = b$.
 	T project_len(P a, P b) const { /// start-hash
