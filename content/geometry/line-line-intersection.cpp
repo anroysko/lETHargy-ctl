@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-08-23
+ * Date: 22-11-01
  * Description: Returns 1 and the intersection point if Line $ab$ and Line $cd$ do not degenerate and they are not parellel. Returns 0 (and an arbitrary point) otherwise.
  *  \textbf{Only} works for \textbf{double} or \textbf{long double}.
  * Status: (double) tested on https://ac.nowcoder.com/acm/contest/33188/G, https://acm.hdu.edu.cn/showproblem.php?pid=6419, https://codeforces.com/gym/256788/problem/C.

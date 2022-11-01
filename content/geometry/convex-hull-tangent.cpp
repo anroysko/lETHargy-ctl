@@ -5,6 +5,7 @@
  *  $p_0, \cdots, p_{n - 1}$ should be distinct points. (It should be fine that $3$ of them are collinear.)
  *  $q$ should be strictly outside the convex hull.
  *  Returns a pair $(l, r)$ such that edges $p_l p_{l + 1}, \cdots, p_{r - 1} p_r$ can be strictly seen from Point $q$.
+ *  \textbf{Needed function(s): dis\_to\_line}.
  * Time: $O(\log n)$.
  * Status: tested on https://ac.nowcoder.com/acm/contest/11261/J, https://codeforces.com/gym/101201/problem/E.
  */

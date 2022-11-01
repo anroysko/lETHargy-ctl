@@ -2,7 +2,7 @@
  * Author: Yuhao Yao
  * Date: 22-10-29
  * Description: Given $n$ points $p_0, ..., p_{n - 1}$ on the plane, find the closest pair in euclidean distance. Returns the minimum squared distance.
- * Time: $O(\log^2 n)$.
+ * Time: $O(n\log^2 n)$.
  * Status: tested on https://www.luogu.com.cn/problem/P7883.
  */
 template<class P, class T = typename P::type>

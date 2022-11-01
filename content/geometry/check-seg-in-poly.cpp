@@ -1,15 +1,19 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-08-22
+ * Date: 22-11-01
  * Description: check if Segment $ab$ is inside the given simple (not necessarily convex) Polygon $poly$, (i.e. no part of the segment is outside the polygon).
  *  Return 0 if the segment has part outside the polygon, otherwise 1. 
- *  $poly$ should be counter-clockwise and non-self-intersecting. Consecutive collinear points in $poly$ should be fine.
+ *  $poly$ should be c.c.w and non-self-intersecting. Consecutive collinear points in $poly$ should be fine.
+ *  If $a = b$, then we need the function \textbf{checkinPoly}.
+ *  \textbf{Needed function(s): dis\_to\_line}.
  * Time: O(|poly| \log |poly|).
  * Status: (long long) tested on https://official.contest.yandex.com/mw2021spring/contest/26875/problems/M. Not sure how strong the tests are.
  */
+#include "check-in-poly.cpp"
 template<class P>
 bool checkSeginPoly(P a, P b, const vector<P> &poly) {
 	using T = typename P::type;
+	if (a == b) return checkinPoly(a, poly) != 0;
 	vector<pair<T, int>> res;
 	int cnt = -1;
 	rep(i, 0, sz(poly) - 1) {

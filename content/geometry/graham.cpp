@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-24
+ * Date: 22-11-01
  * Description: Given a set of \textbf{distinct} points, compute the Convex Hull of them.
  *  By setting $nonStrict = 1$, we also have the points on the border of the Convex Hull.
  *  When using double / long double the exact shape of returned Convex Hull might not be trustful (especially for imprecise points), so you should only use it for calculating the area / perimeter?

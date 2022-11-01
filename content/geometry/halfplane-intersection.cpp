@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-02
+ * Date: 22-11-01
  * Description: Compute the intersection of Half Planes, which is a Convex hull. A Half Plane is represented by the left hind side of a directed line $ab$ (i.e. counter-clockwise).
  *  Please make sure the intersection of Half Planes in $ls$ is bounded.
  *  Also make sure that there is no HalfPlane with direction $dir() = (0, 0)$.
@@ -31,7 +31,6 @@ vector<P> HPI(vector<HalfPlane<P>> hps) {
 	// please make sure hps is closed.  
 	auto Samedir = [](HP &r, HP &s) { return (r < s || s < r) == 0; };
 	sort(all(hps), [&](HP &r, HP &s) { return Samedir(r, s) ? s.include(r.a) : r < s; });
-
 	// assuming hps is closed then the intersect function should be fine.
 	auto check = [](HP &w, HP &r, HP &s) {
 		auto [res, p] = r.capLL(s);

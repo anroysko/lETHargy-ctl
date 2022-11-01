@@ -1,7 +1,8 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-03
- * Description: Calculate the area of union of Simple Polygons $polys$. Points on each Polygon should be in counter-clockwise order.
+ * Date: 22-11-01
+ * Description: Calculate the area of union of Simple c.c.w Polygons $polys$. Points of each polygon should be distinct.
+ *  \textbf{Needed function(s): dis\_to\_line, project\_len}.
  * Time: O(n^2 \log n), where $n$ is the total number of points in all Polygons.
  * Status: tested on https://codeforces.com/gym/101673/problem/A.
  */

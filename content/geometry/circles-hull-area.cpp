@@ -1,11 +1,14 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-03
+ * Date: 22-11-01
  * Description: Compute the area of Convex Hull of Union of Circles.
  * Usage: input $os$ and $rs$ should have same positive sizes.
  * Time: O(n^3), where $n$ is the number of cycles.
  * Status: tested on https://qoj.ac/contest/824/problem/2614, https://codeforces.com/gym/101673/problem/B (compute perimeter instead).
  */
+#include "circle-circle-outer-tangentline.cpp"
+#include "graham.cpp"
+
 template<class T, class P = Point<T>>
 T CirclesHullArea(const vector<P> &os, const vector<T> &rs) {
 	vector<pair<P, T>> cs;

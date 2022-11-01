@@ -1,7 +1,8 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-03
+ * Date: 22-11-01
  * Description: Compute the intersection points of two circles. For two tangent circles, the tangent point is returned twice in the vector.
+ *  \textbf{Needed function(s): rotate}.
  * Status: (double) tested on https://acm.hdu.edu.cn/showproblem.php?pid=6419.
  */
 template<class T, class P = Point<T>>

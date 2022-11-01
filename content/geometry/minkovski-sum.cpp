@@ -1,11 +1,12 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-29
- * Description: Compute the Minkovski Sum of two c.c.w \textbf{Convex Hulls} $P$ and $Q$. The result is also a \textbf{Convex Hull}.
+ * Date: 22-11-01
+ * Description: Compute the Minkovski Sum of two \textbf{Convex Hulls} $P$ and $Q$. The result is also a \textbf{Convex Hull}.
  *  Convex Hulls $P$ and $Q$ should \textbf{not} have duplicate (same) points while consecutive collinear points are allowed.
  *  The returned Convex Hull \textbf{may} have collinear points (on the borders), but \textbf{no} duplicate points.
+ *  \textbf{Needed function(s): argcmp}.
  * Time: O(|P| + |Q|).
- * Status: (long long) tested on https://ac.nowcoder.com/acm/contest/33188/G, https://www.luogu.com.cn/record/92150120.
+ * Status: (long long) tested on https://ac.nowcoder.com/acm/contest/33188/G.
  */
 template<class P>
 vector<P> MinkovskiSum(vector<P> as, vector<P> bs) {

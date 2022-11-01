@@ -3,6 +3,7 @@
  * Date: 22-10-31
  * Description: Compute the intersection of a non-self-intersecting Polygon $poly$ and a Half Plane $ab$ (i.e. the LHS of $ab$).
  *  The returned Polygon can be self intersecting (or say it can be a collection of separate pieces), so it can only be used for area relating problem.
+ *  However, the shape is fine if Polygon $poly$ is convex.
  *  Only works for double or long double.
  *  \textbf{Needed function(s): dis\_to\_line}.
  * Time: O(|poly|).

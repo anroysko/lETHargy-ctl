@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-03
+ * Date: 22-11-01
  * Description: Compute the intersection area of a Circle and a Polygon.
  *  Only works for double or long double.
  * Status: (double) tested on https://official.contest.yandex.com/opencupXXII/contest/38278/problems/K/.

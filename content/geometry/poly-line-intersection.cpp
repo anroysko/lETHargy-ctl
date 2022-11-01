@@ -1,10 +1,11 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-08-20
+ * Date: 22-11-01
  * Description: Compute the intersection (Segments) of a non-self-intersecting Polygon $poly$ and a Line $ab$.
- *  Input $ab$ should be non-degenerate.
+ *  Line $ab$ should be non-degenerate.
  *  Returned Segments are not sorted in direction $ab$.
  *  Only works for double or long double.
+ *  \textbf{Needed function(s): dis\_to\_line}.
  * Time: O(|poly| \log |poly|).
  * Status: (double) tested on https://codeforces.com/gym/101471/problem/A. Need more tests.
  */

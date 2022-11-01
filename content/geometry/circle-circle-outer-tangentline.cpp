@@ -1,7 +1,8 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-03
+ * Date: 22-11-01
  * Description: Compute the outer two tangent lines of two circles.
+ *  \textbf{Needed function(s): rotate}.
  * Status: https://qoj.ac/contest/824/problem/2614.
  */
 template<class T, class P = Point<T>>

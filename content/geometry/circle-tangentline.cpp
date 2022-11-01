@@ -1,12 +1,14 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-09-17
- * Description: Compute the tangent points from Point $a$ to Circle $(o, r)$. return empty vector if $a$ is not outside the given Circle.
+ * Date: 22-11-01
+ * Description: Compute the tangent points from Point $a$ to Circle $(o, r)$.
+ *  Return empty vector if $a$ is not outside the given Circle.
  *  Only works for double or long double.
- * Status: 
+ *  \textbf{Needed function(s): rotate}.
+ * Status: tested on https://qoj.ac/contest/534/problem/972.
  */
 template<class T, class P = Point<T>>
-vector<P> PointCircleTagentPoints(P a, P o, T r) {
+vector<P> PointCircleTangentPoints(P a, P o, T r) {
 	P u = o - a;
 	if (P::cmp(u.len2(), r * r) <= 0) return {};
 	T d = sqrt(max(u.len2() - r * r, T{0}));
