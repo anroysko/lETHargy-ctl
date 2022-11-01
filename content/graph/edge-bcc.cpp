@@ -9,7 +9,7 @@
 auto EdgeBCC(int n, const vector<pii> &es, int st = 0) {
 	vi dfn(n, -1), low(n), id(n), mark(sz(es), 0), sta;
 	int cnt = 0, bcc = 0;
-	vvi g(n);
+	vector<vi> g(n);
 	rep(ind, 0, sz(es) - 1) {
 		auto [x, y] = es[ind];
 		g[x].push_back(ind);

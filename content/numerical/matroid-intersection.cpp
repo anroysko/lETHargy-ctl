@@ -10,7 +10,7 @@ template<class T>
 vector<T> MatroidIntersection(const vector<T> &as, function<void(const vector<T>&)> rebuild, function<bool(const T&)> check1, function<bool(const T&)> check2) {
 	int n = sz(as); 
 	vi used(n);
-	vvi g;
+	vector<vi> g;
 	vector<T> A;
 
 	auto augment = [&]() {

@@ -15,7 +15,7 @@ struct VertexBCC {
 	vector<pii> bf; // edges of the block-forest.
 
 	VertexBCC(int n, const vector<pii> &es): n(n), bcc(0), id(sz(es)), top(n), fa(n, -1) {
-		vvi g(n);
+		vector<vi> g(n);
 		rep(ind, 0, sz(es) - 1) {
 			auto [x, y] = es[ind];
 			g[x].push_back(ind);
@@ -68,7 +68,7 @@ struct VertexBCC {
 	} /// end-hash
 	
 	vector<vi> getBlockForest() { /// start-hash
-		vvi g(n + bcc);
+		vector<vi> g(n + bcc);
 		for (auto [x, y]: bf) {
 			g[x].push_back(y);
 			g[y].push_back(x);

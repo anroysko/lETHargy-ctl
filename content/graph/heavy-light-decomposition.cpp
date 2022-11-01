@@ -11,7 +11,7 @@
 struct HLD {
 	int n; /// start-hash
 	vi fa, hson, dfn, dep, top;
-	HLD(vvi &g, int rt = 0): n(sz(g)), fa(n, -1), hson(n, -1), dfn(n), dep(n, 0), top(n) {
+	HLD(vector<vi> &g, int rt = 0): n(sz(g)), fa(n, -1), hson(n, -1), dfn(n), dep(n, 0), top(n) {
 		vi siz(n);
 		auto dfs = [&](auto &dfs, int now) -> void {
 			siz[now] = 1;

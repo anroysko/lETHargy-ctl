@@ -7,7 +7,7 @@
  *  (bridge) tested on: https://www.luogu.com.cn/problem/P1656.
  */
 auto CutAndBridge(int n, const vector<pii> es) {
-	vvi g(n);
+	vector<vi> g(n);
 	rep(i, 0, sz(es) - 1) {
 		auto [x, y] = es[i];
 		g[x].push_back(i);
