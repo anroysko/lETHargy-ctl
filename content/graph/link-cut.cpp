@@ -1,5 +1,5 @@
 /**
- * Author: Antti Röyskö
+ * Author: Antti Roeyskoe
  * Date: ~2 years ago
  * Description: Link-Cut tree
  * Time: TODO
