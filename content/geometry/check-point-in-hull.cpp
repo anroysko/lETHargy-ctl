@@ -5,7 +5,7 @@
  *  $p_0, \cdots, p_{n - 1}$ should be distinct points. (It should be fine that $3$ of them are collinear.)
  *  Returns $0$ if Point $q$ is outside the hull; $1$ if it is inside the hull; $2$ if it is on the border of the hull.
  * Time: $O(\log n)$.
- * Status: tested on https://codeforces.com/gym/101201/problem/E, https://www.luogu.com.cn/record/92150120.
+ * Status: tested on https://codeforces.com/gym/101201/problem/E, https://www.luogu.com.cn/problem/P4557.
  */
 template<class P>
 int PointInHull(const vector<P> &poly, P q) {

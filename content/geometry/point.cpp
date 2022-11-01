@@ -42,7 +42,7 @@ struct Point {
 	// return -1 if a has smaller pollar; return 1 if a has a larger pollar; return 0 o.w.
 	// Taking unit makes it slower but it performs as atan2.
 	static int argcmp(P a, P b) {
-		if (a.is_upper() != b.is_upper()) return cmp(a.is_upper(), b.is_upper());
+		if (a.is_upper() != b.is_upper()) return a.is_upper() - b.is_upper();
 		return sgn(b.cross(a));
 	} /// end-hash
 
@@ -56,20 +56,31 @@ struct Point {
 		return P{x * a.x - y * a.y, x * a.y + y * a.x};
 	} /// end-hash
 
-	// Returns the signed projected length onto line $ab$. Return 0 if $a = b$.
-	T project_len(P a, P b) const { /// start-hash
-		if (isInt) return (*this - a).dot(b - a);
-		else if (a == b) return 0;
-		else return (*this - a).dot(b - a) / (b - a).len();
-	} /// end-hash
-
-	// Returns the signed distance to line $ab$. $a$ and $b$ should be distinct.
+	// Returns the signed distance to line $ab$. $a$, $b$ should be distinct.
 	T dis_to_line(P a, P b) const { /// start-hash
 		assert((a - b).len2() > P::eps);
 		if (isInt) return (*this - a).cross(b - a);
 		else return (*this - a).cross(b - a) / (b - a).len();
 	} /// end-hash
 	
+	// Check if it is on line $ab$. $a$, $b$ should be distinct.
+	bool on_line(P a, P b) const {  /// start-hash
+		return sgn(dis_to_line(a, b)) == 0;
+	}  /// end-hash
+
+	// Returns the signed projected length onto line $ab$. Return 0 if $a = b$.
+	T project_len(P a, P b) const { /// start-hash
+		if (isInt) return (*this - a).dot(b - a);
+		else if (a == b) return 0;
+		else return (*this - a).dot(b - a) / (b - a).len();
+	} /// end-hash
+	
+	// Calculate the projection to line $ab$. Return $a$ when $a = b$.
+	// Only for double / long double.
+	P project_to_line(P a, P b) const { /// start-hash
+		return a + (b - a).unit() * project_len(a, b);
+	} /// end-hash
+		
 	// Returns the distance to line segment $ab$. Safe when $a = b$.
 	// Only for double / long double.
 	T dis_to_seg(P a, P b) const { /// start-hash
@@ -77,21 +88,10 @@ struct Point {
 		if (project_len(b, a) <= eps) return (*this - b).len();
 		return fabs(dis_to_line(a, b));
 	} /// end-hash
-
-	// Calculate the projection to line $ab$. Return $a$ when $a = b$.
-	// Only for double / long double.
-	P project_to_line(P a, P b) const { /// start-hash
-		return a + (b - a).unit() * project_len(a, b);
-	} /// end-hash
-
+	
 	// Check if it is on segment ab. Safe when a == b.
 	bool on_seg(P a, P b) const {  /// start-hash
 		return dis_to_seg(a, b) <= eps; 
-	}  /// end-hash
-
-	// Check if it is on line $ab$. Need $a != b$.
-	bool on_line(P a, P b) const {  /// start-hash
-		return sgn(dis_to_line(a, b)) == 0;
 	}  /// end-hash
 	
 	friend string to_string(P p) { return "(" + to_string(p.x) + ", " + to_string(p.y) + ")"; }

@@ -1,9 +1,10 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-29
+ * Date: 22-11-01
  * Description: Given a c.c.w convex hull $p_0...p_{n - 1}$ and a vector of lines $ls$, for each line check if it intersects the hull.
  *  $p_0, \cdots, p_{n - 1}$ should be distinct points. (It should be fine that $3$ of them are collinear.)
  *  Returns $0$ if the line does not intersect the hull; $1$ if it intersects the hull properly; $2$ if it passes through exactly a point or an edge of the hull.
+ *  \textbf{Needed function(s): argcmp, dis\_to\_line}.
  * Time: $O(\log n)$.
  * Status: tested on https://www.acmicpc.net/problem/7057.
  */

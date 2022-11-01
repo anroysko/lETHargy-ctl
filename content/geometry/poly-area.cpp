@@ -3,7 +3,7 @@
  * Date: 22-08-29
  * Description: Calculate the signed area of a simple Polygon $poly$. Positive area means counter-clockwise order.
  * Time: O(|poly|).
- * Status: tested on https://c...content-available-to-author-only...s.com/gym/101673/problem/A.
+ * Status: tested on https://codeforces.com/gym/101673/problem/A.
  */
 template<class T>
 T PolyArea(const vector<Point<T>> &poly) {
