@@ -10,7 +10,7 @@
  */
 template<class T>
 struct FFT {
-	using cp = complex<T>;
+	using cp = complex<T>; /// start-hash
 	static constexpr T pi = acos(T{-1});
 	vi r;
 	int n2;
@@ -56,8 +56,8 @@ struct FFT {
 		T eps = T{0.5} * (static_cast<Z>(1e-9) == 0);
 		rep(i, 0, n - 1) res[i] = a[i].real() + eps;
 		return res;
-	}
-	vi conv(const vi &A, const vi &B, int mod) {
+	} /// end-hash
+	vi conv(const vi &A, const vi &B, int mod) { /// start-hash
 		int M = sqrt(mod) + 0.5;
 		int n = sz(A) + sz(B) - 1;
 		pre(n);
@@ -79,5 +79,5 @@ struct FFT {
 		work(a, d, M, mod);
 		work(b, c, M, mod);
 		return res;
-	}
+	} /// end-hash
 };
