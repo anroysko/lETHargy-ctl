@@ -1,6 +1,6 @@
 /**
  * Author: Yuhao Yao
- * Date: 22-10-25
+ * Date: 22-11-11
  * Description: Fast Fourier Transform. $T$ can be \textbf{double} or \textbf{long double}.
  * Usage: FFT<double> fft;
  *  auto cs = fft.conv(vector<double>{1, 2, 3}, vector<double>{3, 4, 5});
@@ -17,9 +17,9 @@ struct FFT {
 
 	void dft(vector<cp> &a, int is_inv) { // is_inv == 1 -> idft.
 		rep(i, 1, n2 - 1) if (r[i] > i) swap(a[i], a[r[i]]);
-		for(int step = 1; step < n2; step <<= 1) {
+		for (int step = 1; step < n2; step <<= 1) {
 			vector<cp> w(step);
-			rep(j, 0, step-1) { // this has higher precision, compared to using the power of zeta.
+			rep(j, 0, step - 1) { // this has higher precision, compared to using the power of zeta.
 				T theta = pi * j / step;
 				if (is_inv) theta = -theta;
 				w[j] = cp{cos(theta), sin(theta)};
